@@ -12,7 +12,7 @@
 ## 🚀 Downloads — Choose Your Platform
 
 **Current Status:** v0.1.0-alpha (Pre-release)  
-**Full platform-specific binaries will be attached to the first stable GitHub Release (v0.1.0)**
+**Full platform-specific binaries will be attached automatically** via GitHub Actions when you create a version tag.
 
 ### Recommended Installers by Operating System
 
@@ -28,7 +28,43 @@ curl -L https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.1.
 chmod +x ~/neobot && ~/neobot
 ```
 
-> **Note:** Once v0.1.0 is released, the links above will automatically point to the latest assets. For now, developers should build from source using the guides below.
+> Once v0.1.0 is released, the links above will point to real assets built by our CI/CD pipeline.
+
+---
+
+## 🛠️ Build from Source (One-Command per Platform)
+
+**Perfect for developers and contributors.** These commands produce the exact same installers that the GitHub Actions workflow creates.
+
+### Prerequisites (All Platforms)
+```bash
+# 1. Clone the repo
+git clone https://github.com/iofhouras/neobot.git
+cd neobot
+
+# 2. Install dependencies (one-time)
+pnpm install
+```
+
+### Linux (AppImage + .deb)
+```bash
+cargo tauri build --bundles appimage,deb
+```
+**Output:** `target/release/bundle/appimage/NeoBot_*.AppImage` and `target/release/bundle/deb/NeoBot_*.deb`
+
+### Windows (NSIS .exe Installer)
+```bash
+cargo tauri build --bundles nsis
+```
+**Output:** `target/release/bundle/nsis/NeoBot_*.exe`
+
+### macOS (Universal DMG)
+```bash
+cargo tauri build --target universal-apple-darwin --bundles dmg
+```
+**Output:** `target/release/bundle/dmg/NeoBot_*.dmg`
+
+> **Tip:** On macOS you may need to run `rustup target add aarch64-apple-darwin x86_64-apple-darwin` first for universal builds.
 
 ---
 
