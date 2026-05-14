@@ -8,29 +8,29 @@
   <h2>One-Click Kali Linux VM + Autonomous AI Agent</h2>
   
   <p><strong>Control everything through WhatsApp, Telegram, or Signal</strong></p>
-  
-  <p>
-    <a href="#-download-now"><strong>⬇️ Download Now</strong></a> •
-    <a href="#-features">Features</a> •
-    <a href="#-quick-start">Quick Start</a>
-  </p>
 </div>
 
 ---
 
-## ⬇️ Download Now
+## ⬇️ Download NeoBot
 
 <div align="center">
 
-### Choose Your Platform
+### ✨ Best Experience: Visit the Official Download Page
 
-| Platform   | **Direct Download**                                                                 | Best For |
-|------------|-------------------------------------------------------------------------------------|----------|
-| **Windows** | **[⬇️ Download Setup.exe](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-Setup.exe)** | Most users |
-| **macOS**   | **[⬇️ Download Universal.dmg](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.1.0.dmg)** | Apple Silicon + Intel |
-| **Linux**   | **[⬇️ Download AppImage](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage)** | Portable |
+<a href="https://iofhouras.github.io/neobot/download.html" style="display: inline-block; background: linear-gradient(90deg, #00ff9d, #00b8ff); color: #0a0a0a; padding: 18px 40px; border-radius: 50px; text-decoration: none; font-weight: bold; font-size: 20px; box-shadow: 0 10px 30px rgba(0, 255, 157, 0.4); transition: transform 0.2s;">
+    🚀 Open Beautiful Download Page
+</a>
 
-**Not sure?** → [Visit the Smart Download Page](https://iofhouras.github.io/neobot/download.html) *(Auto-detects your device)*
+<p><em>Auto-detects your device + beautiful cyberpunk design</em></p>
+
+### Or Download Directly
+
+| Platform   | Direct Link                                                                 | 
+|------------|-----------------------------------------------------------------------------|
+| **Windows** | [Download Setup.exe](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-Setup.exe) |
+| **macOS**   | [Download Universal.dmg](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.1.0.dmg) |
+| **Linux**   | [Download AppImage](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage) |
 
 </div>
 
@@ -93,5 +93,5 @@ MIT License
 ---
 
 <div align="center">
-  <p><strong>Ready to get started?</strong> Download NeoBot above.</p>
+  <p><strong>Ready to get started?</strong> Click the big green button above.</p>
 </div>
