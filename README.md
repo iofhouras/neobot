@@ -48,32 +48,26 @@ Control the AI agent using natural language through WhatsApp, Telegram, or Signa
 graph TD
     %% User Layer
     subgraph User["👤 User Layer"]
-        U[User via Messenger
-        (WhatsApp / Telegram / Signal)]
+        U["User via Messenger<br/>(WhatsApp / Telegram / Signal)"]
     end
 
     %% Messaging Platform
     subgraph Messaging["📱 Messaging Platform Layer"]
-        M[Messaging Platform
-        (API + Webhook)]
+        M["Messaging Platform<br/>(API + Webhook)"]
     end
 
     %% NeoBot Application
     subgraph NeoBot["🖥️ NeoBot Application (Tauri + Rust)"]
-        N1[Pre-Installation Wizard]
-        N2[Secure Credential Vault
-        (Encrypted API Keys)]
-        N3[Zero-Touch Provisioning Engine]
+        N1["Pre-Installation Wizard"]
+        N2["Secure Credential Vault<br/>(Encrypted API Keys)"]
+        N3["Zero-Touch Provisioning Engine"]
     end
 
     %% Kali Linux VM
     subgraph KaliVM["🐧 Kali Linux Virtual Machine"]
-        K1[AI Agent Core
-        (Grok + Tools)]
-        K2[Execution Engine
-        (Root Privileges)]
-        K3[Toolchain
-        (nmap, Metasploit, etc.)]
+        K1["AI Agent Core<br/>(Grok + Tools)"]
+        K2["Execution Engine<br/>(Root Privileges)"]
+        K3["Toolchain<br/>(nmap, Metasploit, etc.)"]
     end
 
     %% Data Flows
