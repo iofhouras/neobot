@@ -5,6 +5,30 @@
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 [![Tauri](https://img.shields.io/badge/Tauri-2.x-FFC131?logo=tauri)](https://tauri.app/)
 [![SvelteKit](https://img.shields.io/badge/SvelteKit-2.x-FF3E00?logo=svelte)](https://kit.svelte.dev/)
+[![GitHub release](https://img.shields.io/github/v/release/iofhouras/neobot?include_prereleases&sort=semver)](https://github.com/iofhouras/neobot/releases)
+
+---
+
+## 🚀 Downloads — Choose Your Platform
+
+**Current Status:** v0.1.0-alpha (Pre-release)  
+**Full platform-specific binaries will be attached to the first stable GitHub Release (v0.1.0)**
+
+### Recommended Installers by Operating System
+
+| Platform      | Recommended Download                          | Alternative                  | Approx. Size | Status          |
+|---------------|-----------------------------------------------|------------------------------|--------------|-----------------|
+| **Linux**     | `NeoBot-0.1.0-x86_64.AppImage`               | `.deb` package              | ~45 MB      | 🔄 Building |
+| **Windows**   | `NeoBot-0.1.0-Setup.exe` (NSIS Installer)    | Portable `.zip`             | ~52 MB      | 🔄 Building |
+| **macOS**     | `NeoBot-0.1.0.dmg` (Universal Apple Silicon + Intel) | —                     | ~48 MB      | 🔄 Building |
+
+**Quick One-Liner Install (Linux)**
+```bash
+curl -L https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.1.0-x86_64.AppImage -o ~/neobot && \
+chmod +x ~/neobot && ~/neobot
+```
+
+> **Note:** Once v0.1.0 is released, the links above will automatically point to the latest assets. For now, developers should build from source using the guides below.
 
 ---
 
