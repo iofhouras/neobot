@@ -2,16 +2,8 @@
 
 **Enterprise-Grade AI-Powered Cybersecurity Automation Platform**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Tauri](https://img.shields.io/badge/Tauri-2.x-FFC131?logo=tauri)](https://tauri.app/)
-[![SvelteKit](https://img.shields.io/badge/SvelteKit-2.x-FF3E00?logo=svelte)](https://kit.svelte.dev/)
-[![Rust](https://img.shields.io/badge/Rust-1.85+-orange?logo=rust)](https://www.rust-lang.org/)
-[![GitHub release](https://img.shields.io/github/v/release/iofhouras/neobot?include_prereleases&sort=semver)](https://github.com/iofhouras/neobot/releases)
-
----
-
 <div align="center">
-  <img src="https://raw.githubusercontent.com/iofhouras/neobot/main/assets/neobot-hero.png" alt="NeoBot Hero" width="800"/>
+  <img src="https://raw.githubusercontent.com/iofhouras/neobot/main/assets/neobot-logo.png" alt="NeoBot Logo" width="220"/>
   
   <p><strong>One-Click Kali Linux VM Provisioning • Autonomous AI Agent • Real-time Messenger Control</strong></p>
   
