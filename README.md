@@ -46,29 +46,29 @@ Built for ethical hackers, red teamers, and security researchers who demand spee
 
 ### 1. Download & Install
 
-**Recommended:** Download the latest release for your platform:
+**Click the links below to download the latest version for your platform:**
 
-| Platform | Download | Status |
-|----------|----------|--------|
-| **Windows** | [NeoBot-Setup.exe](https://github.com/iofhouras/neobot/releases) | Stable |
-| **macOS** | [NeoBot-Universal.dmg](https://github.com/iofhouras/neobot/releases) | Stable |
-| **Linux** | [NeoBot-x86_64.AppImage](https://github.com/iofhouras/neobot/releases) | Stable |
+| Platform   | Direct Download Link                                                                 | Status  |
+|------------|---------------------------------------------------------------------------------------|---------|
+| **Windows** | [⬇️ Download NeoBot-Setup.exe](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-Setup.exe) | Stable |
+| **macOS**   | [⬇️ Download NeoBot-Universal.dmg](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.1.0.dmg) | Stable |
+| **Linux**   | [⬇️ Download NeoBot-x86_64.AppImage](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage) | Stable |
+
+> **Note:** These links always point to the latest release. The files will be available once the first stable version (v0.1.0) is published.
 
 ### 2. Run the Setup Wizard
 
-```bash
-# After installation, launch NeoBot
-# Follow the 5-step wizard:
-# 1. System Check
-# 2. VM Configuration
-# 3. AI Agent Setup (Grok + Messenger keys)
-# 4. Zero-Touch Provisioning
-# 5. Launch
-```
+After downloading and installing, launch NeoBot and follow the guided 5-step wizard:
+
+1. **System Check** — Verify your environment
+2. **VM Configuration** — Set CPU, RAM, and disk size
+3. **AI Agent Setup** — Enter Grok API key and messenger tokens
+4. **Zero-Touch Provisioning** — Automated installation
+5. **Launch** — Start your Kali Linux VM
 
 ### 3. Start Using
 
-Once complete, simply message your AI agent on WhatsApp or Telegram:
+Once setup is complete, simply message your AI agent on WhatsApp or Telegram:
 
 > "Run a full reconnaissance on target.example.com"
 
