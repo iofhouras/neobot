@@ -3,11 +3,18 @@
 **Enterprise-Grade AI-Powered Cybersecurity Automation Platform**
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/iofhouras/neobot/main/assets/neobot-logo.png" alt="NeoBot Logo" width="220"/>
+  
+  <h1>🛡️ NeoBot</h1>
   
   <h2>One-Click Kali Linux VM + Autonomous AI Agent</h2>
   
   <p><strong>Control everything through WhatsApp, Telegram, or Signal</strong></p>
+  
+  <p>
+    <a href="#-download-neobot"><strong>⬇️ Download Now</strong></a> •
+    <a href="#-features">Features</a> •
+    <a href="#-quick-start">Quick Start</a>
+  </p>
 </div>
 
 ---
