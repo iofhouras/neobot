@@ -42,6 +42,75 @@
 
 Control the AI agent using natural language through WhatsApp, Telegram, or Signal.
 
+## System Architecture
+
+```mermaid
+graph TD
+    %% User Layer
+    subgraph User["👤 User Layer"]
+        U[User via Messenger
+        (WhatsApp / Telegram / Signal)]
+    end
+
+    %% Messaging Platform
+    subgraph Messaging["📱 Messaging Platform Layer"]
+        M[Messaging Platform
+        (API + Webhook)]
+    end
+
+    %% NeoBot Application
+    subgraph NeoBot["🖥️ NeoBot Application (Tauri + Rust)"]
+        N1[Pre-Installation Wizard]
+        N2[Secure Credential Vault
+        (Encrypted API Keys)]
+        N3[Zero-Touch Provisioning Engine]
+    end
+
+    %% Kali Linux VM
+    subgraph KaliVM["🐧 Kali Linux Virtual Machine"]
+        K1[AI Agent Core
+        (Grok + Tools)]
+        K2[Execution Engine
+        (Root Privileges)]
+        K3[Toolchain
+        (nmap, Metasploit, etc.)]
+    end
+
+    %% Data Flows
+    U -->|1. Natural Language Command + API Key| M
+    M -->|2. Authenticated Message + Context| N1
+    N1 -->|3. Encrypted Credentials| N2
+    N2 -->|4. Trigger Provisioning| N3
+    N3 -->|5. Download + Verify + Install VM| K1
+    K1 -->|6. Inject Credentials + Configure| K2
+    K2 -->|7. Execute Tools & Commands| K3
+    K3 -->|8. Results + Artifacts| K1
+    K1 -->|9. Response via Messenger| M
+    M -->|10. Final Output to User| U
+
+    %% Security Boundaries
+    classDef security fill:#fff3cd,stroke:#856404,stroke-width:2px
+    class N2,K2 security
+
+    %% Legend
+    classDef userLayer fill:#e3f2fd,stroke:#1565c0
+    classDef messagingLayer fill:#f3e5f5,stroke:#7b1fa2
+    classDef appLayer fill:#e8f5e9,stroke:#2e7d32
+    classDef vmLayer fill:#fff8e1,stroke:#f57c00
+
+    class U userLayer
+    class M messagingLayer
+    class N1,N2,N3 appLayer
+    class K1,K2,K3 vmLayer
+```
+
+**Architecture Highlights:**
+- **Layered Design** with clear security boundaries
+- **End-to-End Encryption** for credentials and communication
+- **Zero-Trust Model** with API key validation at every step
+- **Autonomous Execution** inside isolated Kali Linux VM with root privileges
+- **Real-time Bidirectional Flow** between user and AI agent
+
 ## Key Features
 
 | Category                    | Description |
@@ -58,17 +127,6 @@ Control the AI agent using natural language through WhatsApp, Telegram, or Signa
 2. **Run the installer** and follow the 5-step wizard
 3. **Configure** your AI agent (Grok API + Messenger)
 4. **Launch** your fully provisioned Kali Linux VM
-
-## Architecture
-
-```mermaid
-graph TD
-    A[User] -->|Natural Language| B[Messenger]
-    B --> C[NeoBot]
-    C --> D[Kali Linux VM + AI Agent]
-    D --> E[Execution + Results]
-    E --> B
-```
 
 ## Roadmap
 
