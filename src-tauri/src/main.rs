@@ -2,6 +2,7 @@
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
 mod commands;
+mod core;
 
 use tauri::Builder;
 
@@ -17,6 +18,8 @@ fn main() {
             commands::macos::download_virtualbox_for_macos,
             commands::macos::download_neobot_installer_for_macos,
             commands::macos::get_macos_download_path,
+            commands::terminal::execute_terminal_command,
+            commands::terminal::execute_with_retry,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
