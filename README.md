@@ -16,10 +16,10 @@
   <p><strong>One-Click Kali Linux VM Provisioning • Autonomous AI Agent • Real-time Messenger Control</strong></p>
   
   <p>
-    <a href="#-quick-start">Quick Start</a> •
+    <a href="#-download-now">Download Now</a> •
     <a href="#-features">Features</a> •
-    <a href="#-architecture">Architecture</a> •
-    <a href="#-roadmap">Roadmap</a>
+    <a href="#-quick-start">Quick Start</a> •
+    <a href="#-architecture">Architecture</a>
   </p>
 </div>
 
@@ -30,6 +30,24 @@
 **NeoBot** is a production-ready, cross-platform desktop application that delivers **zero-touch deployment** of a fully hardened Kali Linux virtual machine with an embedded autonomous AI agent. Control everything through natural language via WhatsApp, Telegram, or Signal.
 
 Built for ethical hackers, red teamers, and security researchers who demand speed, security, and automation.
+
+## Download Now
+
+<div align="center">
+
+**Choose your platform below** or visit the **[beautiful download page](https://iofhouras.github.io/neobot/download.html)** for a guided experience.
+
+| Platform   | Direct Download                                                                 | Recommended |
+|------------|----------------------------------------------------------------------------------|-------------|
+| **Windows** | [⬇️ Download Setup.exe](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-Setup.exe) | Best for most users |
+| **macOS**   | [⬇️ Download Universal.dmg](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.1.0.dmg) | Apple Silicon + Intel |
+| **Linux**   | [⬇️ Download AppImage](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage) | Portable & easy |
+
+**Don't know which one?** → [Go to the Smart Download Page](https://iofhouras.github.io/neobot/download.html) *(auto-detects your device)*
+
+</div>
+
+---
 
 ## Key Features
 
@@ -46,29 +64,20 @@ Built for ethical hackers, red teamers, and security researchers who demand spee
 
 ### 1. Download & Install
 
-**Click the links below to download the latest version for your platform:**
-
-| Platform   | Direct Download Link                                                                 | Status  |
-|------------|---------------------------------------------------------------------------------------|---------|
-| **Windows** | [⬇️ Download NeoBot-Setup.exe](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-Setup.exe) | Stable |
-| **macOS**   | [⬇️ Download NeoBot-Universal.dmg](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.1.0.dmg) | Stable |
-| **Linux**   | [⬇️ Download NeoBot-x86_64.AppImage](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage) | Stable |
-
-> **Note:** These links always point to the latest release. The files will be available once the first stable version (v0.1.0) is published.
+Download the version for your operating system above, then run the installer.
 
 ### 2. Run the Setup Wizard
 
-After downloading and installing, launch NeoBot and follow the guided 5-step wizard:
-
-1. **System Check** — Verify your environment
-2. **VM Configuration** — Set CPU, RAM, and disk size
-3. **AI Agent Setup** — Enter Grok API key and messenger tokens
-4. **Zero-Touch Provisioning** — Automated installation
-5. **Launch** — Start your Kali Linux VM
+Launch NeoBot and follow the guided 5-step wizard:
+1. System Check
+2. VM Configuration
+3. AI Agent Setup (Grok + Messenger keys)
+4. Zero-Touch Provisioning
+5. Launch
 
 ### 3. Start Using
 
-Once setup is complete, simply message your AI agent on WhatsApp or Telegram:
+Message your AI agent on WhatsApp or Telegram:
 
 > "Run a full reconnaissance on target.example.com"
 
