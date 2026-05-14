@@ -5,140 +5,93 @@
 <div align="center">
   <img src="https://raw.githubusercontent.com/iofhouras/neobot/main/assets/neobot-logo.png" alt="NeoBot Logo" width="220"/>
   
-  <p><strong>One-Click Kali Linux VM Provisioning • Autonomous AI Agent • Real-time Messenger Control</strong></p>
+  <h2>One-Click Kali Linux VM + Autonomous AI Agent</h2>
+  
+  <p><strong>Control everything through WhatsApp, Telegram, or Signal</strong></p>
   
   <p>
-    <a href="#-download-now">Download Now</a> •
+    <a href="#-download-now"><strong>⬇️ Download Now</strong></a> •
     <a href="#-features">Features</a> •
-    <a href="#-quick-start">Quick Start</a> •
-    <a href="#-architecture">Architecture</a>
+    <a href="#-quick-start">Quick Start</a>
   </p>
+</div>
+
+---
+
+## ⬇️ Download Now
+
+<div align="center">
+
+### Choose Your Platform
+
+| Platform   | **Direct Download**                                                                 | Best For |
+|------------|-------------------------------------------------------------------------------------|----------|
+| **Windows** | **[⬇️ Download Setup.exe](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-Setup.exe)** | Most users |
+| **macOS**   | **[⬇️ Download Universal.dmg](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.1.0.dmg)** | Apple Silicon + Intel |
+| **Linux**   | **[⬇️ Download AppImage](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage)** | Portable |
+
+**Not sure?** → [Visit the Smart Download Page](https://iofhouras.github.io/neobot/download.html) *(Auto-detects your device)*
+
 </div>
 
 ---
 
 ## What is NeoBot?
 
-**NeoBot** is a production-ready, cross-platform desktop application that delivers **zero-touch deployment** of a fully hardened Kali Linux virtual machine with an embedded autonomous AI agent. Control everything through natural language via WhatsApp, Telegram, or Signal.
+**NeoBot** is a production-ready, cross-platform desktop application that delivers **zero-touch deployment** of a fully hardened Kali Linux virtual machine with an embedded autonomous AI agent.
 
-Built for ethical hackers, red teamers, and security researchers who demand speed, security, and automation.
-
-## Download Now
-
-<div align="center">
-
-**Choose your platform below** or visit the **[beautiful download page](https://iofhouras.github.io/neobot/download.html)** for a guided experience.
-
-| Platform   | Direct Download                                                                 | Recommended |
-|------------|----------------------------------------------------------------------------------|-------------|
-| **Windows** | [⬇️ Download Setup.exe](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-Setup.exe) | Best for most users |
-| **macOS**   | [⬇️ Download Universal.dmg](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.1.0.dmg) | Apple Silicon + Intel |
-| **Linux**   | [⬇️ Download AppImage](https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage) | Portable & easy |
-
-**Don't know which one?** → [Go to the Smart Download Page](https://iofhouras.github.io/neobot/download.html) *(auto-detects your device)*
-
-</div>
-
----
+Control the AI agent using natural language through WhatsApp, Telegram, or Signal.
 
 ## Key Features
 
-| Category              | Highlights |
-|-----------------------|----------|
-| **Zero-Touch Provisioning** | Fully automated VM creation, hardening, and AI agent deployment in under 15 minutes |
-| **AI Agent Orchestration** | Persistent, conversational AI agent controllable via WhatsApp, Telegram, Signal |
-| **Enterprise Security** | Encrypted credential vault, zero-trust architecture, sandboxed execution |
-| **Toolchain Automation** | 15+ pre-installed pentesting tools with intelligent orchestration |
-| **Cross-Platform** | Native builds for Windows, macOS, and Linux with professional installers |
-| **Real-time Control** | Bidirectional messaging with low-latency command execution |
+| Category                    | Description |
+|-----------------------------|-----------|
+| **Zero-Touch Provisioning** | Fully automated VM creation + AI agent deployment in under 15 minutes |
+| **Conversational AI Agent** | Control via WhatsApp, Telegram, or Signal using natural language |
+| **Enterprise Security**     | Encrypted credential vault + zero-trust architecture |
+| **Advanced Toolchain**      | 15+ pre-installed pentesting tools with intelligent orchestration |
+| **Cross-Platform**          | Native apps for Windows, macOS, and Linux |
 
 ## Quick Start
 
-### 1. Download & Install
-
-Download the version for your operating system above, then run the installer.
-
-### 2. Run the Setup Wizard
-
-Launch NeoBot and follow the guided 5-step wizard:
-1. System Check
-2. VM Configuration
-3. AI Agent Setup (Grok + Messenger keys)
-4. Zero-Touch Provisioning
-5. Launch
-
-### 3. Start Using
-
-Message your AI agent on WhatsApp or Telegram:
-
-> "Run a full reconnaissance on target.example.com"
+1. **Download** the version for your platform above
+2. **Run the installer** and follow the 5-step wizard
+3. **Configure** your AI agent (Grok API + Messenger)
+4. **Launch** your fully provisioned Kali Linux VM
 
 ## Architecture
 
 ```mermaid
 graph TD
-    A[User] -->|Natural Language| B[Messenger Platform]
-    B --> C[NeoBot Backend]
-    C --> D[Kali Linux VM]
-    D --> E[AI Agent + Tools]
-    E --> F[Execution Engine]
-    F --> G[Results]
-    G --> B
-```
-
-**Core Components:**
-- **Frontend**: SvelteKit + Tailwind + shadcn/ui (Cyberpunk theme)
-- **Backend**: Rust + Tauri 2 (secure, lightweight)
-- **VM Layer**: VirtualBox with automated provisioning
-- **AI Layer**: Grok + extensible tool system (OpenClaw-inspired)
-
-## Project Structure
-
-```
-neobot/
-├── src-tauri/              # Rust backend
-│   ├── src/
-│   ├── commands/         # Tauri commands
-│   ├── core/             # Terminal, security, AI
-│   ├── provisioning/     # Zero-touch engine
-│   ├── ai_agent/         # Agent orchestration
-├── frontend/               # SvelteKit UI
-├── assets/                 # Icons, logos
-├── docs/                   # Documentation
-└── .github/                # Workflows, templates
+    A[User] -->|Natural Language| B[Messenger]
+    B --> C[NeoBot]
+    C --> D[Kali Linux VM + AI Agent]
+    D --> E[Execution + Results]
+    E --> B
 ```
 
 ## Roadmap
 
-- [x] Core VM Provisioning Engine
-- [x] AI Agent Framework
+- [x] Core VM + AI Agent System
 - [x] Multi-Platform Support
-- [ ] Full Messenger Integration (WhatsApp + Telegram)
-- [ ] Vector Memory + Long-term Context
+- [ ] Full WhatsApp + Telegram Integration
+- [ ] Vector Memory & Long-term Context
 - [ ] Plugin Marketplace
-- [ ] Enterprise SSO & Audit Logging
-- [ ] Mobile Companion App
 
 ## Contributing
 
-We welcome contributions! Please read our [Contributing Guidelines](CONTRIBUTING.md) before submitting PRs.
+Contributions are welcome! See [CONTRIBUTING.md](CONTRIBUTING.md)
 
 ## Security & Ethics
 
-**NeoBot is designed exclusively for authorized penetration testing and ethical security research.**
-
-- All actions require explicit user confirmation
-- Encrypted credential storage
-- Full audit logging
-- Never use against systems you do not have permission to test
+**For authorized penetration testing and ethical security research only.**
 
 ## License
 
-This project is licensed under the MIT License — see the [LICENSE](LICENSE) file for details.
+MIT License
 
 ---
 
 <div align="center">
-  <p>Made with ❤️ by the NeoBot Team</p>
-  <p>Questions? Open an issue or join our discussions.</p>
+  <p><strong>Ready to get started?</strong> Download NeoBot above.</p>
 </div>
