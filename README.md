@@ -9,6 +9,24 @@
 
 ---
 
+## 🌐 Official Download Page
+
+<div align="center">
+
+**[🚀 Visit the Beautiful NeoBot Download Page →](https://iofhouras.github.io/neobot/download.html)**
+
+*Modern cyber-themed page with one-click platform downloads, build instructions, and more.*
+
+**To enable the clean URL above:**
+1. Go to your repo **Settings** → **Pages**
+2. Set **Source** to `Deploy from a branch`
+3. Select branch `main` and folder `/ (root)`
+4. Click **Save** — your download page will be live in ~1 minute!
+
+</div>
+
+---
+
 ## 🚀 Downloads — Choose Your Platform
 
 **Current Status:** v0.1.0-alpha (Pre-release)  
