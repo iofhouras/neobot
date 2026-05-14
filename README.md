@@ -9,21 +9,34 @@
 
 ---
 
-## 🌐 Official Download Page
+## 🌐 Official Download Page (PUBLISHED)
 
-<div align="center">
+<div align="center" style="margin: 30px 0;">
 
 **[🚀 Visit the Beautiful NeoBot Download Page →](https://iofhouras.github.io/neobot/download.html)**
 
-*Modern cyber-themed page with one-click platform downloads, build instructions, and more.*
-
-**To enable the clean URL above:**
-1. Go to your repo **Settings** → **Pages**
-2. Set **Source** to `Deploy from a branch`
-3. Select branch `main` and folder `/ (root)`
-4. Click **Save** — your download page will be live in ~1 minute!
+*Advanced professional webpage with platform detection, animated stats, interactive modals, and cyberpunk design.*
 
 </div>
+
+### ⚠️ How to Publish / Enable GitHub Pages (One-Time Setup)
+
+**The webpage is already created and ready.** You just need to enable GitHub Pages once:
+
+1. Go to your repository: **https://github.com/iofhouras/neobot**
+2. Click on the **Settings** tab (top right)
+3. In the left sidebar, click **Pages**
+4. Under **Build and deployment**:
+   - **Source**: Select **Deploy from a branch**
+   - **Branch**: Select `main`
+   - **Folder**: Select `/ (root)`
+5. Click the green **Save** button
+
+**Done!** Your professional download page will be live at:
+**https://iofhouras.github.io/neobot/download.html** within 30–60 seconds.
+
+> **Temporary direct link** (works immediately):  
+> https://raw.githubusercontent.com/iofhouras/neobot/main/download.html
 
 ---
 
