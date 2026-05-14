@@ -3,6 +3,8 @@
 
 mod commands;
 mod core;
+mod ai_agent;
+mod provisioning;
 
 use tauri::Builder;
 
@@ -20,6 +22,7 @@ fn main() {
             commands::macos::get_macos_download_path,
             commands::terminal::execute_terminal_command,
             commands::terminal::execute_with_retry,
+            commands::provisioning::run_zero_touch_provisioning,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
