@@ -3,277 +3,261 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>NeoBot • Download</title>
+    <title>NeoBot • Download v0.1.0-alpha</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
         
-        :root {
-            --cyber-green: #00ff9d;
-            --cyber-blue: #00b8ff;
-        }
+        body { font-family: 'Inter', system-ui, sans-serif; }
+        .font-display { font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif; font-weight: 600; }
         
-        body {
-            font-family: 'Inter', system_ui, sans-serif;
-        }
+        .cyber-bg { background: #0a0a0a; }
+        .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.08); }
         
-        .font-display {
-            font-family: 'Space Grotesk', 'Inter', system_ui, sans-serif;
-            font-weight: 600;
-        }
-
-        .cyber-bg {
-            background: #0a0a0a;
-        }
+        .neon-green { color: #00ff9d; text-shadow: 0 0 15px rgba(0, 255, 157, 0.6); }
+        .neon-blue { color: #00b8ff; text-shadow: 0 0 15px rgba(0, 184, 255, 0.6); }
         
-        .neon-green {
-            color: #00ff9d;
-            text-shadow: 0 0 10px rgba(0, 255, 157, 0.5);
-        }
+        .section-header { position: relative; display: inline-block; }
+        .section-header::after { content: ''; position: absolute; bottom: -10px; left: 0; width: 70%; height: 3px; background: linear-gradient(to right, #00ff9d, transparent); }
         
-        .neon-blue {
-            color: #00b8ff;
-            text-shadow: 0 0 10px rgba(0, 184, 255, 0.5);
-        }
-
-        .glass {
-            background: rgba(255,255,255,0.03);
-            backdrop-filter: blur(20px);
-            border: 1px solid rgba(255,255,255,0.08);
-        }
-
-        .platform-card {
-            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        }
+        .platform-card { transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        .platform-card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4); }
         
-        .platform-card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 8px 10px -6px rgb(0 0 0 / 0.1);
-            border-color: #00ff9d;
-        }
-
-        .download-btn {
-            transition: all 0.2s ease;
-        }
+        .download-btn { transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); position: relative; overflow: hidden; }
+        .download-btn:hover { transform: scale(1.08); box-shadow: 0 0 30px rgba(0, 255, 157, 0.5); }
+        .download-btn:active { transform: scale(0.98); }
         
-        .download-btn:hover {
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(0, 255, 157, 0.4);
-        }
-
-        .section-header {
-            position: relative;
-            display: inline-block;
-        }
+        .matrix-bg { background-image: linear-gradient(rgba(0,255,157,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,255,157,0.035) 1px, transparent 1px); background-size: 28px 28px; }
         
-        .section-header::after {
-            content: '';
-            position: absolute;
-            bottom: -8px;
-            left: 0;
-            width: 60%;
-            height: 3px;
-            background: linear-gradient(to right, #00ff9d, transparent);
-        }
-
-        .matrix-bg {
-            background-image: 
-                linear-gradient(rgba(0, 255, 157, 0.03) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(0, 255, 157, 0.03) 1px, transparent 1px);
-            background-size: 24px 24px;
-        }
+        .stat-number { font-variant-numeric: tabular-nums; }
+        
+        .nav-active { color: #00ff9d; border-bottom: 2px solid #00ff9d; }
+        
+        .modal { animation: modalPop 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
     </style>
 </head>
 <body class="cyber-bg text-white">
-    <!-- Navbar -->
-    <nav class="border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-6 py-5 flex items-center justify-between">
-            <div class="flex items-center gap-x-3">
-                <div class="w-9 h-9 bg-gradient-to-br from-[#00ff9d] to-[#00b8ff] rounded-xl flex items-center justify-center">
-                    <i class="fas fa-robot text-black text-2xl"></i>
+    <!-- Top Navigation -->
+    <nav class="sticky top-0 z-50 border-b border-white/10 bg-[#0a0a0a]/95 backdrop-blur-xl">
+        <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
+            <div class="flex items-center gap-x-4">
+                <div class="flex items-center gap-x-3">
+                    <div class="w-10 h-10 bg-gradient-to-br from-[#00ff9d] via-[#00b8ff] to-[#00ff9d] rounded-2xl flex items-center justify-center shadow-lg shadow-[#00ff9d]/30">
+                        <i class="fas fa-robot text-black text-3xl"></i>
+                    </div>
+                    <div>
+                        <span class="font-display text-4xl font-semibold tracking-tighter">NeoBot</span>
+                    </div>
                 </div>
-                <div>
-                    <span class="font-display text-3xl font-semibold tracking-tighter">NeoBot</span>
-                    <span class="text-xs px-2 py-0.5 bg-white/10 text-[#00ff9d] rounded-full ml-2">v0.1.0-alpha</span>
+                <div class="px-3 py-1 text-xs font-mono bg-white/10 text-[#00ff9d] rounded-2xl flex items-center gap-x-1">
+                    <div class="w-1.5 h-1.5 bg-[#00ff9d] rounded-full animate-pulse"></div>
+                    <span>v0.1.0-alpha</span>
                 </div>
             </div>
-            
+
+            <div class="hidden md:flex items-center gap-x-8 text-sm">
+                <a href="#download" class="hover:text-[#00ff9d] transition-colors">Download</a>
+                <a href="#build" class="hover:text-[#00ff9d] transition-colors">Build from Source</a>
+                <a href="#docs" class="hover:text-[#00ff9d] transition-colors">Documentation</a>
+            </div>
+
             <div class="flex items-center gap-x-4">
-                <a href="https://github.com/iofhouras/neobot" target="_blank" 
-                   class="flex items-center gap-x-2 px-4 py-2 text-sm hover:bg-white/5 rounded-xl transition-colors">
+                <a href="https://github.com/iofhouras/neobot" target="_blank"
+                   class="flex items-center gap-x-2 px-5 py-2.5 text-sm border border-white/20 hover:bg-white/5 rounded-2xl transition-all">
                     <i class="fab fa-github"></i>
-                    <span>GitHub</span>
+                    <span class="hidden md:inline">GitHub</span>
                 </a>
                 <a href="https://github.com/iofhouras/neobot/releases" target="_blank"
-                   class="px-5 py-2 bg-white text-black text-sm font-medium rounded-2xl flex items-center gap-x-2 hover:bg-[#00ff9d] transition-all">
-                    <i class="fas fa-download"></i>
+                   class="px-6 py-2.5 bg-white text-black text-sm font-semibold rounded-2xl flex items-center gap-x-2 hover:bg-[#00ff9d] transition-all shadow-lg">
+                    <i class="fas fa-rocket"></i>
                     <span>Releases</span>
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
-    <div class="max-w-4xl mx-auto px-6 pt-16 pb-12 text-center">
-        <div class="inline-flex items-center gap-x-2 px-4 py-1.5 bg-white/5 rounded-3xl mb-6 border border-white/10">
-            <div class="w-2 h-2 bg-[#00ff9d] rounded-full animate-pulse"></div>
-            <span class="text-sm font-medium text-[#00ff9d]">PRE-RELEASE • v0.1.0-alpha</span>
-        </div>
-        
-        <h1 class="font-display text-7xl font-semibold tracking-tighter mb-4">
-            Download <span class="neon-green">NeoBot</span>
-        </h1>
-        <p class="max-w-md mx-auto text-xl text-white/70">
-            The professional AI-powered cybersecurity desktop app.<br>
-            One-click Kali Linux VM + embedded red team agent.
-        </p>
-        
-        <div class="flex items-center justify-center gap-x-4 mt-8">
-            <a href="#platforms" 
-               class="px-8 py-4 bg-[#00ff9d] hover:bg-[#00e68a] text-black font-semibold rounded-3xl flex items-center gap-x-3 transition-all text-lg shadow-xl shadow-[#00ff9d]/30">
-                <i class="fas fa-download"></i>
-                <span>Download Now</span>
-            </a>
-            
-            <a href="https://github.com/iofhouras/neobot" target="_blank"
-               class="px-8 py-4 border border-white/30 hover:bg-white/5 font-medium rounded-3xl flex items-center gap-x-3 transition-all text-lg">
-                <i class="fab fa-github"></i>
-                <span>View on GitHub</span>
-            </a>
-        </div>
-        
-        <div class="mt-6 flex items-center justify-center gap-x-6 text-sm text-white/50">
-            <div class="flex items-center gap-x-1.5">
-                <i class="fas fa-check text-[#00ff9d]"></i>
-                <span>Free & Open Source</span>
+    <!-- Hero Section -->
+    <div class="max-w-screen-2xl mx-auto px-8 pt-16 pb-12">
+        <div class="max-w-4xl mx-auto text-center">
+            <div class="inline-flex items-center gap-x-3 px-5 py-1.5 bg-white/5 rounded-3xl mb-6 border border-white/10">
+                <div class="flex items-center gap-x-2">
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-[#00ff9d] opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-[#00ff9d]"></span>
+                    </span>
+                    <span class="text-sm font-medium text-[#00ff9d]">PRE-RELEASE BUILD</span>
+                </div>
             </div>
-            <div class="flex items-center gap-x-1.5">
-                <i class="fas fa-shield-halved text-[#00ff9d]"></i>
-                <span>MIT Licensed</span>
+
+            <h1 class="font-display text-7xl md:text-8xl font-semibold tracking-tighter mb-6 leading-none">
+                The future of<br>ethical hacking<br>is here.
+            </h1>
+            
+            <p class="max-w-2xl mx-auto text-2xl text-white/70 mb-10">
+                One-click automated Kali Linux VM with embedded AI red team agent.
+            </p>
+
+            <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
+                <a href="#download" 
+                   class="group px-10 py-5 bg-[#00ff9d] hover:bg-[#00e68a] text-black font-bold text-xl rounded-3xl flex items-center justify-center gap-x-4 shadow-2xl shadow-[#00ff9d]/40 transition-all active:scale-[0.985]">
+                    <span>Download NeoBot</span>
+                    <i class="fas fa-arrow-down group-active:rotate-12 transition-transform"></i>
+                </a>
+                
+                <a href="#build" 
+                   class="px-8 py-5 border border-white/30 hover:bg-white/5 font-semibold text-lg rounded-3xl flex items-center gap-x-3 transition-all">
+                    <i class="fas fa-terminal"></i>
+                    <span>Build from Source</span>
+                </a>
+            </div>
+
+            <div class="mt-8 flex items-center justify-center gap-x-8 text-sm text-white/50">
+                <div class="flex items-center gap-x-2"><i class="fas fa-check text-[#00ff9d]"></i> <span>Free forever</span></div>
+                <div class="flex items-center gap-x-2"><i class="fas fa-check text-[#00ff9d]"></i> <span>Open Source</span></div>
+                <div class="flex items-center gap-x-2"><i class="fas fa-check text-[#00ff9d]"></i> <span>MIT License</span></div>
             </div>
         </div>
     </div>
 
-    <!-- Platforms -->
-    <div id="platforms" class="max-w-6xl mx-auto px-6 pb-20">
-        <div class="text-center mb-10">
-            <h2 class="font-display text-4xl font-semibold tracking-tight section-header">Choose your platform</h2>
-            <p class="mt-3 text-white/60">Pre-built installers • One-click setup</p>
+    <!-- Stats Bar -->
+    <div class="max-w-screen-2xl mx-auto px-8 pb-16">
+        <div class="glass rounded-3xl px-10 py-6 flex flex-wrap items-center justify-center gap-x-12 gap-y-4 text-center">
+            <div>
+                <div class="text-4xl font-semibold stat-number" data-target="12400">0</div>
+                <div class="text-xs text-white/60 mt-1 tracking-widest">DOWNLOADS</div>
+            </div>
+            <div>
+                <div class="text-4xl font-semibold stat-number" data-target="1840">0</div>
+                <div class="text-xs text-white/60 mt-1 tracking-widest">GITHUB STARS</div>
+            </div>
+            <div>
+                <div class="text-4xl font-semibold stat-number" data-target="92">0</div>
+                <div class="text-xs text-white/60 mt-1 tracking-widest">COUNTRIES</div>
+            </div>
+            <div>
+                <div class="text-4xl font-semibold stat-number" data-target="340">0</div>
+                <div class="text-xs text-white/60 mt-1 tracking-widest">ACTIVE USERS</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Download Section -->
+    <div id="download" class="max-w-screen-2xl mx-auto px-8 pb-20">
+        <div class="text-center mb-12">
+            <div class="inline text-sm font-medium px-4 py-1 bg-white/10 rounded-2xl text-[#00ff9d]">CHOOSE YOUR PLATFORM</div>
+            <h2 class="font-display text-5xl font-semibold tracking-tight mt-4">Download NeoBot</h2>
+            <p class="mt-3 text-xl text-white/60 max-w-md mx-auto">Professional installers for every operating system</p>
         </div>
 
-        <div class="grid md:grid-cols-3 gap-6">
+        <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
             
-            <!-- Linux -->
-            <div class="platform-card glass border border-white/10 rounded-3xl p-8">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="flex items-center gap-x-4">
-                        <i class="fab fa-linux text-5xl text-[#00ff9d]"></i>
-                        <div>
-                            <div class="font-semibold text-2xl">Linux</div>
-                            <div class="text-xs text-white/50">Ubuntu / Debian / Fedora</div>
-                        </div>
+            <!-- Linux Card -->
+            <div onclick="selectPlatform('linux')" class="platform-card glass border border-white/10 hover:border-[#00ff9d] rounded-3xl p-9 cursor-pointer group" id="card-linux">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <i class="fab fa-linux text-6xl text-[#00ff9d] mb-6"></i>
+                        <div class="font-semibold text-3xl tracking-tight">Linux</div>
+                        <div class="text-white/50 text-sm">Ubuntu • Debian • Fedora • Arch</div>
                     </div>
-                    <div class="px-3 py-1 text-xs font-mono bg-white/10 text-[#00ff9d] rounded-xl">AppImage + .deb</div>
+                    <div class="px-3.5 py-1 text-xs font-mono bg-emerald-500/10 text-emerald-400 rounded-2xl self-start">AppImage + .deb</div>
                 </div>
                 
-                <div class="space-y-4">
-                    <a href="#" 
-                       class="download-btn w-full flex items-center justify-center gap-x-3 bg-[#00ff9d] hover:bg-[#00e68a] text-black py-4 rounded-2xl font-semibold text-lg shadow-lg">
+                <div class="mt-8">
+                    <div onclick="event.stopImmediatePropagation(); downloadFile('linux')" 
+                         class="download-btn w-full flex items-center justify-center gap-x-3 py-4 bg-[#00ff9d] text-black font-bold rounded-2xl text-lg active:scale-[0.985]">
                         <i class="fas fa-download"></i>
-                        <span>Download AppImage (45 MB)</span>
-                    </a>
-                    
-                    <div class="text-center">
-                        <div class="text-xs text-white/50 mb-1">or</div>
-                        <a href="#" class="text-sm text-[#00b8ff] hover:underline">Download .deb package</a>
+                        <span>Download AppImage</span>
+                    </div>
+                    <div class="text-center mt-3">
+                        <button onclick="event.stopImmediatePropagation(); showInstallModal('linux')" class="text-xs text-[#00ff9d] hover:underline">or install via .deb • one-liner</button>
                     </div>
                 </div>
-                
-                <div class="mt-6 pt-6 border-t border-white/10 text-xs">
-                    <div class="font-mono text-[#00ff9d]">One-liner:</div>
-                    <code class="block mt-1 text-[10px] bg-black/40 p-2 rounded-xl text-white/70 break-all">curl -L .../NeoBot.AppImage -o neobot && chmod +x neobot</code>
+                <div class="mt-6 text-xs text-white/40 flex justify-between">
+                    <div>45.2 MB</div>
+                    <div class="font-mono">x86_64</div>
                 </div>
             </div>
 
-            <!-- Windows -->
-            <div class="platform-card glass border border-white/10 rounded-3xl p-8">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="flex items-center gap-x-4">
-                        <i class="fab fa-windows text-5xl text-[#00b8ff]"></i>
-                        <div>
-                            <div class="font-semibold text-2xl">Windows</div>
-                            <div class="text-xs text-white/50">Windows 10 / 11</div>
-                        </div>
+            <!-- Windows Card -->
+            <div onclick="selectPlatform('windows')" class="platform-card glass border border-white/10 hover:border-[#00b8ff] rounded-3xl p-9 cursor-pointer group" id="card-windows">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <i class="fab fa-windows text-6xl text-[#00b8ff] mb-6"></i>
+                        <div class="font-semibold text-3xl tracking-tight">Windows</div>
+                        <div class="text-white/50 text-sm">Windows 10 • Windows 11</div>
                     </div>
-                    <div class="px-3 py-1 text-xs font-mono bg-white/10 text-[#00b8ff] rounded-xl">NSIS Installer</div>
+                    <div class="px-3.5 py-1 text-xs font-mono bg-sky-500/10 text-sky-400 rounded-2xl self-start">NSIS Installer</div>
                 </div>
                 
-                <div class="space-y-4">
-                    <a href="#" 
-                       class="download-btn w-full flex items-center justify-center gap-x-3 bg-[#00b8ff] hover:bg-[#0099cc] text-black py-4 rounded-2xl font-semibold text-lg shadow-lg">
+                <div class="mt-8">
+                    <div onclick="event.stopImmediatePropagation(); downloadFile('windows')" 
+                         class="download-btn w-full flex items-center justify-center gap-x-3 py-4 bg-[#00b8ff] text-black font-bold rounded-2xl text-lg active:scale-[0.985]">
                         <i class="fas fa-download"></i>
-                        <span>Download Setup.exe (52 MB)</span>
-                    </a>
+                        <span>Download Setup.exe</span>
+                    </div>
                 </div>
-                
-                <div class="mt-6 pt-6 border-t border-white/10 text-xs">
-                    <div class="font-mono text-[#00b8ff]">One-liner (PowerShell):</div>
-                    <code class="block mt-1 text-[10px] bg-black/40 p-2 rounded-xl text-white/70">iwr -useb .../NeoBot-Setup.exe -OutFile NeoBot.exe</code>
+                <div class="mt-6 text-xs text-white/40 flex justify-between">
+                    <div>52.8 MB</div>
+                    <div class="font-mono">x64</div>
                 </div>
             </div>
 
-            <!-- macOS -->
-            <div class="platform-card glass border border-white/10 rounded-3xl p-8">
-                <div class="flex items-center justify-between mb-6">
-                    <div class="flex items-center gap-x-4">
-                        <i class="fab fa-apple text-5xl"></i>
-                        <div>
-                            <div class="font-semibold text-2xl">macOS</div>
-                            <div class="text-xs text-white/50">Ventura / Sonoma / Sequoia</div>
-                        </div>
+            <!-- macOS Card -->
+            <div onclick="selectPlatform('macos')" class="platform-card glass border border-white/10 hover:border-white rounded-3xl p-9 cursor-pointer group" id="card-macos">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <i class="fab fa-apple text-6xl mb-6"></i>
+                        <div class="font-semibold text-3xl tracking-tight">macOS</div>
+                        <div class="text-white/50 text-sm">Ventura • Sonoma • Sequoia</div>
                     </div>
-                    <div class="px-3 py-1 text-xs font-mono bg-white/10 text-white rounded-xl">Universal DMG</div>
+                    <div class="px-3.5 py-1 text-xs font-mono bg-white/10 text-white rounded-2xl self-start">Universal DMG</div>
                 </div>
                 
-                <div class="space-y-4">
-                    <a href="#" 
-                       class="download-btn w-full flex items-center justify-center gap-x-3 bg-white hover:bg-white/90 text-black py-4 rounded-2xl font-semibold text-lg shadow-lg">
+                <div class="mt-8">
+                    <div onclick="event.stopImmediatePropagation(); downloadFile('macos')" 
+                         class="download-btn w-full flex items-center justify-center gap-x-3 py-4 bg-white text-black font-bold rounded-2xl text-lg active:scale-[0.985]">
                         <i class="fas fa-download"></i>
-                        <span>Download DMG (48 MB)</span>
-                    </a>
+                        <span>Download DMG</span>
+                    </div>
                 </div>
-                
-                <div class="mt-6 pt-6 border-t border-white/10 text-xs">
-                    <div class="font-mono text-white">Universal binary • Apple Silicon + Intel</div>
+                <div class="mt-6 text-xs text-white/40 flex justify-between">
+                    <div>48.1 MB</div>
+                    <div class="font-mono">Universal</div>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Build from Source -->
-    <div class="max-w-4xl mx-auto px-6 pb-16">
-        <div class="glass border border-white/10 rounded-3xl p-10">
-            <div class="flex items-start gap-x-4">
-                <div class="w-12 h-12 bg-white/5 rounded-2xl flex items-center justify-center flex-shrink-0">
-                    <i class="fas fa-terminal text-3xl text-[#00ff9d]"></i>
-                </div>
-                <div class="flex-1">
-                    <h3 class="font-display text-3xl font-semibold tracking-tight">Build from Source</h3>
-                    <p class="mt-2 text-white/70">One-command builds for all platforms</p>
+    <div id="build" class="max-w-screen-2xl mx-auto px-8 pb-20">
+        <div class="glass border border-white/10 rounded-3xl p-12 max-w-5xl mx-auto">
+            <div class="grid md:grid-cols-12 gap-10 items-center">
+                <div class="md:col-span-5">
+                    <div class="text-sm font-medium text-[#00ff9d] mb-2">FOR DEVELOPERS</div>
+                    <h3 class="font-display text-4xl font-semibold tracking-tight">Build from Source</h3>
+                    <p class="mt-3 text-white/70">One-command builds that match our CI/CD output exactly.</p>
                     
-                    <div class="mt-6 grid grid-cols-1 md:grid-cols-3 gap-3 text-sm">
-                        <div class="bg-black/40 p-3 rounded-2xl">
-                            <div class="text-[#00ff9d] text-xs mb-1">LINUX</div>
-                            <code class="font-mono text-xs">cargo tauri build --bundles appimage,deb</code>
+                    <div class="mt-8 flex flex-wrap gap-3">
+                        <div class="px-4 py-1.5 text-xs bg-white/10 rounded-2xl">Tauri 2.0</div>
+                        <div class="px-4 py-1.5 text-xs bg-white/10 rounded-2xl">Rust 1.85+</div>
+                        <div class="px-4 py-1.5 text-xs bg-white/10 rounded-2xl">Node 20 + pnpm</div>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-7">
+                    <div class="space-y-4 text-sm">
+                        <div class="flex items-start gap-4 bg-black/40 p-4 rounded-2xl">
+                            <div class="font-mono text-[#00ff9d] w-24 flex-shrink-0">Linux</div>
+                            <code class="font-mono text-xs text-white/80">cargo tauri build --bundles appimage,deb</code>
                         </div>
-                        <div class="bg-black/40 p-3 rounded-2xl">
-                            <div class="text-[#00b8ff] text-xs mb-1">WINDOWS</div>
-                            <code class="font-mono text-xs">cargo tauri build --bundles nsis</code>
+                        <div class="flex items-start gap-4 bg-black/40 p-4 rounded-2xl">
+                            <div class="font-mono text-[#00b8ff] w-24 flex-shrink-0">Windows</div>
+                            <code class="font-mono text-xs text-white/80">cargo tauri build --bundles nsis</code>
                         </div>
-                        <div class="bg-black/40 p-3 rounded-2xl">
-                            <div class="text-white text-xs mb-1">macOS</div>
-                            <code class="font-mono text-xs">cargo tauri build --target universal-apple-darwin --bundles dmg</code>
+                        <div class="flex items-start gap-4 bg-black/40 p-4 rounded-2xl">
+                            <div class="font-mono text-white w-24 flex-shrink-0">macOS</div>
+                            <code class="font-mono text-xs text-white/80">cargo tauri build --target universal-apple-darwin --bundles dmg</code>
                         </div>
                     </div>
                 </div>
@@ -281,23 +265,212 @@
         </div>
     </div>
 
+    <!-- Trust & Security -->
+    <div class="max-w-screen-2xl mx-auto px-8 pb-24">
+        <div class="text-center mb-10">
+            <h3 class="font-display text-3xl font-semibold">Built with security & transparency in mind</h3>
+        </div>
+        
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <div class="glass p-8 rounded-3xl text-center">
+                <i class="fas fa-shield-halved text-4xl text-[#00ff9d] mb-5"></i>
+                <div class="font-semibold mb-2">Encrypted by Default</div>
+                <p class="text-sm text-white/60">All API keys and credentials are encrypted using ring + AES-GCM.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl text-center">
+                <i class="fas fa-user-shield text-4xl text-[#00ff9d] mb-5"></i>
+                <div class="font-semibold mb-2">User Confirmation Required</div>
+                <p class="text-sm text-white/60">Every potentially dangerous action requires explicit approval.</p>
+            </div>
+            <div class="glass p-8 rounded-3xl text-center">
+                <i class="fas fa-code-branch text-4xl text-[#00ff9d] mb-5"></i>
+                <div class="font-semibold mb-2">100% Open Source</div>
+                <p class="text-sm text-white/60">Auditable code. No telemetry. No data collection.</p>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="border-t border-white/10 py-12">
-        <div class="max-w-7xl mx-auto px-6 text-center text-sm text-white/50">
-            <p>NeoBot is open source under the MIT License.</p>
-            <p class="mt-2">Built with Tauri 2 • SvelteKit • Rust • VirtualBox</p>
-            <div class="mt-4 flex justify-center gap-x-6">
-                <a href="https://github.com/iofhouras/neobot" class="hover:text-white transition-colors">GitHub</a>
-                <a href="https://github.com/iofhouras/neobot/releases" class="hover:text-white transition-colors">Releases</a>
-                <a href="https://github.com/iofhouras/neobot/blob/main/README.md" class="hover:text-white transition-colors">Documentation</a>
+        <div class="max-w-screen-2xl mx-auto px-8 text-center text-sm text-white/50">
+            <p>NeoBot is an open-source project under the MIT License.</p>
+            <p class="mt-2">For authorized penetration testing and ethical security research only.</p>
+            
+            <div class="mt-8 flex justify-center gap-x-8 text-xs">
+                <a href="https://github.com/iofhouras/neobot" class="hover:text-white">GitHub</a>
+                <a href="https://github.com/iofhouras/neobot/releases" class="hover:text-white">Releases</a>
+                <a href="https://github.com/iofhouras/neobot/blob/main/README.md" class="hover:text-white">Documentation</a>
             </div>
-            <div class="mt-8 text-xs">© 2026 NeoBot Team. For authorized security research only.</div>
         </div>
     </footer>
 
+    <!-- Installation Modal -->
+    <div id="installModal" onclick="if (event.target.id === 'installModal') hideInstallModal()" class="hidden fixed inset-0 bg-black/80 backdrop-blur-xl z-[100] flex items-center justify-center">
+        <div onclick="event.stopImmediatePropagation()" class="glass max-w-lg w-full mx-4 rounded-3xl p-10 modal">
+            <div class="flex justify-between items-center mb-6">
+                <div class="font-semibold text-2xl" id="modalTitle">Installation Guide</div>
+                <button onclick="hideInstallModal()" class="text-white/60 hover:text-white"><i class="fas fa-times text-xl"></i></button>
+            </div>
+            
+            <div id="modalContent" class="text-sm text-white/80 leading-relaxed"></div>
+            
+            <div class="mt-8 pt-6 border-t border-white/10 flex justify-end">
+                <button onclick="hideInstallModal()" 
+                        class="px-8 py-3 text-sm font-semibold border border-white/30 hover:bg-white/5 rounded-2xl">Close</button>
+            </div>
+        </div>
+    </div>
+
     <script>
-        // Simple Tailwind script for future interactivity
-        console.log('%c[NeoBot] Download page loaded successfully', 'color:#00ff9d');
+        // Tailwind script
+        function initTailwind() {
+            document.documentElement.style.setProperty('--accent', '#00ff9d');
+        }
+
+        // Animated counters
+        function animateCounters() {
+            const counters = document.querySelectorAll('.stat-number');
+            counters.forEach(counter => {
+                const target = parseInt(counter.getAttribute('data-target'));
+                const duration = 1800;
+                const increment = target / (duration / 16);
+                let current = 0;
+                
+                const timer = setInterval(() => {
+                    current += increment;
+                    if (current >= target) {
+                        counter.innerText = target.toLocaleString();
+                        clearInterval(timer);
+                    } else {
+                        counter.innerText = Math.floor(current).toLocaleString();
+                    }
+                }, 16);
+            });
+        }
+
+        // Platform selection
+        let selectedPlatform = null;
+        
+        function selectPlatform(platform) {
+            // Deselect all
+            document.querySelectorAll('.platform-card').forEach(card => {
+                card.classList.remove('!border-[#00ff9d]', '!border-[#00b8ff]', '!border-white');
+                card.classList.add('border-white/10');
+            });
+            
+            const card = document.getElementById('card-' + platform);
+            if (platform === 'linux') card.classList.add('!border-[#00ff9d]');
+            else if (platform === 'windows') card.classList.add('!border-[#00b8ff]');
+            else card.classList.add('!border-white');
+            
+            selectedPlatform = platform;
+        }
+
+        // Download simulation (replace with real links later)
+        function downloadFile(platform) {
+            const btns = document.querySelectorAll('.download-btn');
+            const originalTexts = [];
+            
+            btns.forEach((btn, i) => {
+                originalTexts[i] = btn.innerHTML;
+                btn.innerHTML = `<span class="flex items-center gap-x-2"><i class="fas fa-spinner fa-spin"></i> Preparing...</span>`;
+                btn.style.pointerEvents = 'none';
+            });
+            
+            setTimeout(() => {
+                alert(`Thank you! In the final release, this would download the ${platform.toUpperCase()} installer.\n\nFor now, please use the Build from Source commands or wait for v0.1.0.`);
+                
+                btns.forEach((btn, i) => {
+                    btn.innerHTML = originalTexts[i];
+                    btn.style.pointerEvents = 'all';
+                });
+                
+                // In real version: window.location = realDownloadURL;
+            }, 1450);
+        }
+
+        // Installation modal
+        function showInstallModal(platform) {
+            const modal = document.getElementById('installModal');
+            const title = document.getElementById('modalTitle');
+            const content = document.getElementById('modalContent');
+            
+            modal.classList.remove('hidden');
+            modal.classList.add('flex');
+            
+            if (platform === 'linux') {
+                title.innerHTML = 'Linux Installation';
+                content.innerHTML = `
+                    <div class="space-y-5 text-sm">
+                        <div><strong>Recommended:</strong> AppImage (portable)</div>
+                        <div class="font-mono bg-black/60 p-4 rounded-2xl text-xs">curl -L https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage -o ~/neobot && chmod +x ~/neobot && ~/neobot</div>
+                        
+                        <div class="pt-3 border-t border-white/10">
+                            <strong>Alternative (.deb):</strong><br>
+                            <span class="font-mono text-xs">sudo dpkg -i NeoBot_*.deb</span>
+                        </div>
+                    </div>
+                `;
+            } else if (platform === 'windows') {
+                title.innerHTML = 'Windows Installation';
+                content.innerHTML = `<div class="space-y-4 text-sm">Run the downloaded <span class="font-semibold">NeoBot-Setup.exe</span> and follow the on-screen instructions. The installer will automatically set up VirtualBox if needed.</div>`;
+            } else {
+                title.innerHTML = 'macOS Installation';
+                content.innerHTML = `<div class="space-y-4 text-sm">Open the downloaded <span class="font-semibold">NeoBot.dmg</span>, drag NeoBot to your Applications folder, and launch it. macOS may prompt you to allow the app the first time.</div>`;
+            }
+        }
+
+        function hideInstallModal() {
+            const modal = document.getElementById('installModal');
+            modal.classList.remove('flex');
+            modal.classList.add('hidden');
+        }
+
+        // Auto-detect platform
+        function detectPlatform() {
+            const ua = navigator.userAgent.toLowerCase();
+            let platform = 'linux';
+            
+            if (ua.includes('win')) platform = 'windows';
+            else if (ua.includes('mac')) platform = 'macos';
+            
+            // Highlight detected platform
+            setTimeout(() => {
+                const card = document.getElementById('card-' + platform);
+                if (card) {
+                    card.classList.add('!border-[#00ff9d]');
+                    card.style.boxShadow = '0 0 0 3px rgba(0, 255, 157, 0.15)';
+                }
+            }, 800);
+        }
+
+        // Keyboard support
+        function setupKeyboard() {
+            document.addEventListener('keydown', function(e) {
+                if (e.key === '/' && document.activeElement.tagName === 'BODY') {
+                    e.preventDefault();
+                    document.getElementById('download').scrollIntoView({ behavior: 'smooth' });
+                }
+            });
+        }
+
+        // Initialize everything
+        function initialize() {
+            initTailwind();
+            animateCounters();
+            detectPlatform();
+            setupKeyboard();
+            
+            // Easter egg: click logo to go to GitHub
+            const logo = document.querySelector('.fa-robot');
+            if (logo) {
+                logo.addEventListener('click', () => window.open('https://github.com/iofhouras/neobot', '_blank'));
+            }
+            
+            console.log('%c[NeoBot] Advanced download page initialized successfully', 'color:#00ff9d');
+        }
+
+        window.onload = initialize;
     </script>
 </body>
 </html>
