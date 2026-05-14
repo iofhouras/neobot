@@ -14,6 +14,9 @@ fn main() {
             commands::windows::download_virtualbox_for_windows,
             commands::windows::download_neobot_installer_for_windows,
             commands::windows::get_windows_download_path,
+            commands::macos::download_virtualbox_for_macos,
+            commands::macos::download_neobot_installer_for_macos,
+            commands::macos::get_macos_download_path,
         ])
         .run(tauri::generate_context!())
         .expect("error while running tauri application");
