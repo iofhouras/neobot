@@ -12,7 +12,7 @@
 ## 🚀 Download NeoBot
 
 <p align="center">
-  <a href="https://github.com/iofhouras/neobot/releases/latest" 
+  <a href="https://iofhouras.github.io/neobot/download.html" 
      style="display: inline-block; 
             background: linear-gradient(90deg, #00ff9d, #00b8ff); 
             color: #0a0a0a; 
@@ -24,12 +24,12 @@
             box-shadow: 0 15px 50px rgba(0, 255, 157, 0.6); 
             transition: all 0.3s ease;
             border: 3px solid #00ff9d;">
-    ⬇️ DOWNLOAD LATEST VERSION (v1.0)
+    ⬇️ DOWNLOAD FOR LINUX / WINDOWS / macOS
   </a>
 </p>
 
 <p align="center" style="margin-top: 15px; font-size: 18px; color: #00b8ff;">
-  <strong>One-click installer • Works on Windows, macOS & Linux • Free & Open Source</strong>
+  <strong>Smart platform detection • One-click installers • Free & Open Source</strong>
 </p>
 
 ---
@@ -115,7 +115,7 @@ See `docs/neobot-integration.md` for detailed setup.
 
 ---
 
-**All changes committed on `phase3-prominent-download-link` branch.**  
+**All changes committed on `phase3-download-html-page` branch.**  
 Ready for merge to `main`.
 
 ---
