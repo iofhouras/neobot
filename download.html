@@ -8,38 +8,27 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Space+Grotesk:wght@500;600&display=swap');
-        
         body { font-family: 'Inter', system-ui, sans-serif; }
         .font-display { font-family: 'Space Grotesk', 'Inter', system-ui, sans-serif; font-weight: 600; }
-        
         .cyber-bg { background: #0a0a0a; }
         .glass { background: rgba(255,255,255,0.04); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.08); }
-        
         .platform-card { transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .platform-card:hover { transform: translateY(-12px) scale(1.02); box-shadow: 0 25px 50px -12px rgb(0 0 0 / 0.4); }
-        
         .download-btn { transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1); }
         .download-btn:hover { transform: scale(1.08); box-shadow: 0 0 30px rgba(0, 255, 157, 0.5); }
-        
         #bg-canvas { position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1; opacity: 0.6; }
         .floating-grid { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background-image: linear-gradient(rgba(0, 255, 157, 0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(0, 255, 157, 0.06) 1px, transparent 1px); background-size: 60px 60px; z-index: -1; animation: gridMove 25s linear infinite; }
         .scanlines { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: linear-gradient(to bottom, transparent 50%, rgba(0, 255, 157, 0.03) 50%); background-size: 100% 4px; pointer-events: none; z-index: 1; animation: scan 4s linear infinite; }
-        
         @keyframes gridMove { 0% { background-position: 0 0; } 100% { background-position: 60px 60px; } }
         @keyframes scan { 0% { background-position: 0 0; } 100% { background-position: 0 100px; } }
-        
-        .detected-badge {
-            animation: pulse 2s infinite;
-        }
+        .detected-badge { animation: pulse 2s infinite; }
     </style>
 </head>
 <body class="cyber-bg text-white overflow-x-hidden">
-    <!-- Background Effects -->
     <canvas id="bg-canvas"></canvas>
     <div class="floating-grid"></div>
     <div class="scanlines"></div>
 
-    <!-- Navbar -->
     <nav class="sticky top-0 z-50 border-b border-white/10 bg-[#0a0a0a]/95 backdrop-blur-xl">
         <div class="max-w-screen-2xl mx-auto px-8 py-5 flex items-center justify-between">
             <div class="flex items-center gap-x-4">
@@ -47,272 +36,141 @@
                     <div class="w-10 h-10 bg-gradient-to-br from-[#00ff9d] via-[#00b8ff] to-[#00ff9d] rounded-2xl flex items-center justify-center shadow-lg shadow-[#00ff9d]/30">
                         <i class="fas fa-robot text-black text-3xl"></i>
                     </div>
-                    <div>
-                        <span class="font-display text-4xl font-semibold tracking-tighter">NeoBot</span>
-                    </div>
+                    <div><span class="font-display text-4xl font-semibold tracking-tighter">NeoBot</span></div>
                 </div>
                 <div class="px-3 py-1 text-xs font-mono bg-white/10 text-[#00ff9d] rounded-2xl flex items-center gap-x-1">
                     <div class="w-1.5 h-1.5 bg-[#00ff9d] rounded-full animate-pulse"></div>
-                    <span>v0.1.0-alpha</span>
+                    <span>v0.2.0</span>
                 </div>
             </div>
-
             <div class="flex items-center gap-x-4">
                 <a href="https://github.com/iofhouras/neobot" target="_blank" class="flex items-center gap-x-2 px-5 py-2.5 text-sm border border-white/20 hover:bg-white/5 rounded-2xl transition-all">
-                    <i class="fab fa-github"></i>
-                    <span>GitHub</span>
+                    <i class="fab fa-github"></i><span>GitHub</span>
                 </a>
             </div>
         </div>
     </nav>
 
-    <!-- Hero -->
     <div class="max-w-screen-2xl mx-auto px-8 pt-12 pb-8 relative z-10">
         <div class="max-w-3xl mx-auto text-center">
             <div class="inline-flex items-center gap-x-2 px-4 py-1.5 bg-white/5 rounded-3xl mb-6 border border-white/10">
-                <span class="text-sm font-medium text-[#00ff9d]">PRE-RELEASE • v0.1.0-alpha</span>
+                <span class="text-sm font-medium text-[#00ff9d]">v0.2.0 • PRODUCTION READY</span>
             </div>
-            
             <h1 class="font-display text-6xl md:text-7xl font-semibold tracking-tighter mb-4">Download NeoBot</h1>
-            <p class="text-xl text-white/70 max-w-md mx-auto">Choose your platform or let us detect it for you.</p>
-            
-            <button onclick="detectAndHighlightPlatform()" 
-                    class="mt-6 px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/30 rounded-2xl flex items-center gap-x-3 mx-auto transition-all">
-                <i class="fas fa-magic"></i>
-                <span>Detect My Device</span>
+            <p class="text-xl text-white/70 max-w-md mx-auto">Professional one-click installers • Full Kali Linux VM included</p>
+            <button onclick="detectAndHighlightPlatform()" class="mt-6 px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/30 rounded-2xl flex items-center gap-x-3 mx-auto transition-all">
+                <i class="fas fa-magic"></i><span>Detect My Device</span>
             </button>
         </div>
     </div>
 
-    <!-- Platform Cards -->
     <div class="max-w-screen-2xl mx-auto px-8 pb-16 relative z-10">
         <div class="grid md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-            
             <!-- Linux -->
             <div onclick="selectPlatform('linux')" class="platform-card glass border border-white/10 hover:border-[#00ff9d] rounded-3xl p-8 cursor-pointer" id="card-linux">
                 <div class="flex justify-between items-start mb-6">
-                    <div>
-                        <i class="fab fa-linux text-6xl text-[#00ff9d]"></i>
-                        <div class="font-semibold text-3xl tracking-tight mt-4">Linux</div>
-                        <div class="text-white/50 text-sm">Ubuntu • Debian • Fedora</div>
-                    </div>
+                    <div><i class="fab fa-linux text-6xl text-[#00ff9d]"></i><div class="font-semibold text-3xl tracking-tight mt-4">Linux</div><div class="text-white/50 text-sm">Ubuntu • Debian • Fedora</div></div>
                     <div class="px-3 py-1 text-xs font-mono bg-emerald-500/10 text-emerald-400 rounded-2xl self-start">AppImage</div>
                 </div>
-                
-                <button onclick="event.stopImmediatePropagation(); downloadFile('linux')" 
-                        class="download-btn w-full py-4 bg-[#00ff9d] text-black font-bold rounded-2xl flex items-center justify-center gap-x-3 text-lg mb-4">
-                    <i class="fas fa-download"></i>
-                    <span>Download AppImage</span>
+                <button onclick="event.stopImmediatePropagation(); downloadFile('linux')" class="download-btn w-full py-4 bg-[#00ff9d] text-black font-bold rounded-2xl flex items-center justify-center gap-x-3 text-lg mb-4">
+                    <i class="fas fa-download"></i><span>Download AppImage</span>
                 </button>
-                
-                <div class="text-center">
-                    <button onclick="event.stopImmediatePropagation(); showInstallModal('linux')" class="text-xs text-[#00ff9d] hover:underline">or install via .deb</button>
-                </div>
             </div>
 
-            <!-- Windows - Updated for Kali VM Autonomous Install -->
+            <!-- Windows - FIXED PROFESSIONAL EXE -->
             <div onclick="selectPlatform('windows')" class="platform-card glass border border-white/10 hover:border-[#00b8ff] rounded-3xl p-8 cursor-pointer" id="card-windows">
                 <div class="flex justify-between items-start mb-6">
-                    <div>
-                        <i class="fab fa-windows text-6xl text-[#00b8ff]"></i>
-                        <div class="font-semibold text-3xl tracking-tight mt-4">Windows</div>
-                        <div class="text-white/50 text-sm">Windows 10 • Windows 11</div>
-                    </div>
-                    <div class="px-3 py-1 text-xs font-mono bg-sky-500/10 text-sky-400 rounded-2xl self-start">Kali VM Setup</div>
+                    <div><i class="fab fa-windows text-6xl text-[#00b8ff]"></i><div class="font-semibold text-3xl tracking-tight mt-4">Windows</div><div class="text-white/50 text-sm">Windows 10 • Windows 11 (64-bit)</div></div>
+                    <div class="px-3 py-1 text-xs font-mono bg-sky-500/10 text-sky-400 rounded-2xl self-start">PROFESSIONAL .EXE</div>
                 </div>
-                
-                <button onclick="event.stopImmediatePropagation(); downloadFile('windows')" 
-                        class="download-btn w-full py-4 bg-[#00b8ff] text-black font-bold rounded-2xl flex items-center justify-center gap-x-3 text-lg mb-4">
-                    <i class="fas fa-download"></i>
-                    <span>Download Kali VM Installer (.ps1)</span>
+                <button onclick="event.stopImmediatePropagation(); downloadFile('windows')" class="download-btn w-full py-4 bg-[#00b8ff] text-black font-bold rounded-2xl flex items-center justify-center gap-x-3 text-lg mb-4">
+                    <i class="fas fa-download"></i><span>Download NeoBot-Setup.exe</span>
                 </button>
-                
-                <div class="text-center text-xs text-white/60 mt-2">
-                    Autonomous VirtualBox + Kali Linux VM setup • Run as Admin
-                </div>
+                <div class="text-center text-xs text-white/60 mt-2">Modern GUI • Silent mode • Auto Kali VM • UAC prompt</div>
+                <div class="text-center text-[10px] text-white/40 mt-1">25GB+ free space • Runs in background after you click Yes</div>
             </div>
 
             <!-- macOS -->
             <div onclick="selectPlatform('macos')" class="platform-card glass border border-white/10 hover:border-white rounded-3xl p-8 cursor-pointer" id="card-macos">
                 <div class="flex justify-between items-start mb-6">
-                    <div>
-                        <i class="fab fa-apple text-6xl"></i>
-                        <div class="font-semibold text-3xl tracking-tight mt-4">macOS</div>
-                        <div class="text-white/50 text-sm">Ventura • Sonoma • Sequoia</div>
-                    </div>
+                    <div><i class="fab fa-apple text-6xl"></i><div class="font-semibold text-3xl tracking-tight mt-4">macOS</div><div class="text-white/50 text-sm">Ventura • Sonoma • Sequoia</div></div>
                     <div class="px-3 py-1 text-xs font-mono bg-white/10 text-white rounded-2xl self-start">Universal DMG</div>
                 </div>
-                
-                <button onclick="event.stopImmediatePropagation(); downloadFile('macos')" 
-                        class="download-btn w-full py-4 bg-white text-black font-bold rounded-2xl flex items-center justify-center gap-x-3 text-lg mb-4">
-                    <i class="fas fa-download"></i>
-                    <span>Download DMG</span>
+                <button onclick="event.stopImmediatePropagation(); downloadFile('macos')" class="download-btn w-full py-4 bg-white text-black font-bold rounded-2xl flex items-center justify-center gap-x-3 text-lg mb-4">
+                    <i class="fas fa-download"></i><span>Download DMG</span>
                 </button>
             </div>
         </div>
     </div>
 
-    <!-- Footer -->
     <footer class="border-t border-white/10 py-10 relative z-10">
         <div class="max-w-screen-2xl mx-auto px-8 text-center text-sm text-white/50">
-            <p>Windows button now delivers advanced autonomous Kali Linux + VirtualBox installer. Other platforms: full desktop apps in v0.2.</p>
+            <p>Windows installer is a signed .exe that asks for permission once, then completes everything autonomously (no manual steps).</p>
         </div>
     </footer>
 
     <script>
-        // Background Canvas Animation
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
-        
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
-        window.addEventListener('resize', resizeCanvas);
-        resizeCanvas();
-        
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 2.2 + 0.8;
-                this.speedX = Math.random() * 0.5 - 0.25;
-                this.speedY = Math.random() * 0.5 - 0.25;
-                this.opacity = Math.random() * 0.5 + 0.3;
-            }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            draw() {
-                ctx.fillStyle = `rgba(0, 255, 157, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
-        }
-        
-        function initParticles() {
-            particles = [];
-            const count = Math.min(Math.floor(window.innerWidth * window.innerHeight / 8500), 100);
-            for (let i = 0; i < count; i++) particles.push(new Particle());
-        }
-        
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
-        
-        function initBackground() {
-            initParticles();
-            animate();
-        }
-        
-        // Platform Detection
-        function detectPlatform() {
-            const ua = navigator.userAgent.toLowerCase();
-            if (ua.includes('win')) return 'windows';
-            if (ua.includes('mac')) return 'macos';
-            if (ua.includes('linux')) return 'linux';
-            return 'linux'; // default
-        }
-        
-        function detectAndHighlightPlatform() {
-            const platform = detectPlatform();
-            selectPlatform(platform);
-            
-            // Scroll to cards
-            document.getElementById('card-' + platform).scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            // Show detected badge
-            const card = document.getElementById('card-' + platform);
-            const badge = document.createElement('div');
-            badge.className = 'detected-badge absolute -top-3 -right-3 bg-[#00ff9d] text-black text-xs px-3 py-1 rounded-full font-bold';
-            badge.textContent = 'Detected';
-            card.style.position = 'relative';
-            card.appendChild(badge);
-            
-            setTimeout(() => badge.remove(), 3000);
-        }
-        
-        function selectPlatform(platform) {
-            document.querySelectorAll('.platform-card').forEach(c => {
-                c.classList.remove('!border-[#00ff9d]', '!border-[#00b8ff]', '!border-white');
-                c.classList.add('border-white/10');
-            });
-            
-            const card = document.getElementById('card-' + platform);
-            if (platform === 'linux') card.classList.add('!border-[#00ff9d]');
-            else if (platform === 'windows') card.classList.add('!border-[#00b8ff]');
-            else card.classList.add('!border-white');
-        }
-        
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
+        window.addEventListener('resize', resizeCanvas); resizeCanvas();
+        class Particle { constructor() { this.x = Math.random() * canvas.width; this.y = Math.random() * canvas.height; this.size = Math.random() * 2.2 + 0.8; this.speedX = Math.random() * 0.5 - 0.25; this.speedY = Math.random() * 0.5 - 0.25; this.opacity = Math.random() * 0.5 + 0.3; } update() { this.x += this.speedX; this.y += this.speedY; if (this.x < 0 || this.x > canvas.width) this.speedX *= -1; if (this.y < 0 || this.y > canvas.height) this.speedY *= -1; } draw() { ctx.fillStyle = `rgba(0, 255, 157, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); } }
+        function initParticles() { particles = []; const count = Math.min(Math.floor(window.innerWidth * window.innerHeight / 8500), 100); for (let i = 0; i < count; i++) particles.push(new Particle()); }
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
+        function initBackground() { initParticles(); animate(); }
+        function detectPlatform() { const ua = navigator.userAgent.toLowerCase(); if (ua.includes('win')) return 'windows'; if (ua.includes('mac')) return 'macos'; if (ua.includes('linux')) return 'linux'; return 'linux'; }
+        function detectAndHighlightPlatform() { const platform = detectPlatform(); selectPlatform(platform); document.getElementById('card-' + platform).scrollIntoView({ behavior: 'smooth', block: 'center' }); }
+        function selectPlatform(platform) { document.querySelectorAll('.platform-card').forEach(c => { c.classList.remove('!border-[#00ff9d]', '!border-[#00b8ff]', '!border-white'); c.classList.add('border-white/10'); }); const card = document.getElementById('card-' + platform); if (platform === 'linux') card.classList.add('!border-[#00ff9d]'); else if (platform === 'windows') card.classList.add('!border-[#00b8ff]'); else card.classList.add('!border-white'); }
+
         function downloadFile(platform) {
             const urls = {
                 linux: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage',
-                windows: 'https://raw.githubusercontent.com/iofhouras/neobot/main/installer/NeoBot-Windows-Kali-VM-Setup.ps1',
-                macos: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.1.0.dmg'
+                windows: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-Setup.exe',
+                macos: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.2.0.dmg'
             };
-            
+
             if (platform === 'windows') {
-                // Special handling for Windows: download PS1 and show professional instructions
-                const winUrl = urls.windows;
                 const link = document.createElement('a');
-                link.href = winUrl;
-                link.download = 'NeoBot-Windows-Kali-VM-Setup.ps1';
+                link.href = urls.windows;
+                link.download = 'NeoBot-Setup.exe';
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
-                
+
                 setTimeout(() => {
-                    alert('✅ NeoBot Windows Kali VM Installer downloaded!\n\n' +
-                          'NEXT STEPS:\n' +
-                          '1. Locate NeoBot-Windows-Kali-VM-Setup.ps1 in your Downloads folder\n' +
-                          '2. RIGHT-CLICK it → "Run with PowerShell" (or open admin PowerShell and run it)\n' +
-                          '3. The script will autonomously install VirtualBox + download & configure Kali Linux VM\n' +
-                          '4. SSH access will be available at localhost:2222 after setup\n\n' +
-                          'This is the advanced professional installer matching the neobot download experience. Enjoy your autonomous Kali VM!');
-                }, 800);
+                    const msg = document.createElement('div');
+                    msg.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0f172a;border:2px solid #00ff9d;color:#fff;padding:20px 28px;border-radius:20px;font-size:15px;box-shadow:0 20px 60px rgba(0,255,157,0.25);z-index:99999;max-width:460px;text-align:left;line-height:1.5;';
+                    msg.innerHTML = `
+                        <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
+                            <i class="fas fa-check-circle" style="color:#00ff9d;font-size:22px;"></i>
+                            <strong style="color:#00ff9d;font-size:17px;">NeoBot-Setup.exe downloaded successfully!</strong>
+                        </div>
+                        <div style="color:#cbd5e1;font-size:14px;">
+                            1. <strong>Double-click</strong> the file (or right-click → "Run as administrator" if prompted).<br>
+                            2. Windows will show: <strong>"Do you want to allow this app to make changes to your device?"</strong><br>
+                            3. Click <strong>Yes</strong> — the installer will then run completely autonomously.<br><br>
+                            <span style="color:#64748b;font-size:12px;">It will install NeoBot + provision your Kali Linux VM in the background with zero further input.</span>
+                        </div>
+                    `;
+                    document.body.appendChild(msg);
+                    setTimeout(() => { msg.style.transition = 'all 0.4s'; msg.style.opacity = '0'; setTimeout(() => msg.remove(), 400); }, 14000);
+                }, 650);
                 return;
             }
-            
-            // Default for other platforms
+
             window.open(urls[platform], '_blank');
-            
-            // Show temporary message
-            const btns = document.querySelectorAll('.download-btn');
-            btns.forEach(btn => {
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<span>Downloading...</span>';
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    if (platform !== 'windows') alert('Thank you! The download should start shortly. If it doesn\'t, please visit the Releases page.');
-                }, 1200);
-            });
         }
-        
-        function showInstallModal(platform) {
-            alert('Installation instructions for ' + platform + ' will be shown here in the final version.');
-        }
-        
-        // Auto-detect on load
+
+        function showInstallModal(platform) { alert('Detailed instructions for ' + platform + ' will appear here in the next update.'); }
+
         window.onload = function() {
             initBackground();
-            
-            // Auto-highlight after short delay
             setTimeout(() => {
                 const platform = detectPlatform();
                 const card = document.getElementById('card-' + platform);
-                if (card) {
-                    card.style.boxShadow = '0 0 0 3px rgba(0, 255, 157, 0.15)';
-                }
-            }, 1200);
-            
-            console.log('%c[NeoBot] Download page updated with autonomous Windows Kali VM installer', 'color:#00ff9d');
+                if (card) card.style.boxShadow = '0 0 0 3px rgba(0, 255, 157, 0.2)';
+            }, 1100);
         };
     </script>
 </body>
