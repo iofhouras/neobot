@@ -77,24 +77,23 @@
                 </button>
             </div>
 
-            <!-- Windows - FIXED PROFESSIONAL EXE -->
+            <!-- Windows - FIXED AUTONOMOUS PS1 INSTALLER -->
             <div onclick="selectPlatform('windows')" class="platform-card glass border border-white/10 hover:border-[#00b8ff] rounded-3xl p-8 cursor-pointer" id="card-windows">
                 <div class="flex justify-between items-start mb-6">
                     <div><i class="fab fa-windows text-6xl text-[#00b8ff]"></i><div class="font-semibold text-3xl tracking-tight mt-4">Windows</div><div class="text-white/50 text-sm">Windows 10 • Windows 11 (64-bit)</div></div>
-                    <div class="px-3 py-1 text-xs font-mono bg-sky-500/10 text-sky-400 rounded-2xl self-start">PROFESSIONAL .EXE</div>
+                    <div class="px-3 py-1 text-xs font-mono bg-sky-500/10 text-sky-400 rounded-2xl self-start">AUTONOMOUS PS1</div>
                 </div>
                 <button onclick="event.stopImmediatePropagation(); downloadFile('windows')" class="download-btn w-full py-4 bg-[#00b8ff] text-black font-bold rounded-2xl flex items-center justify-center gap-x-3 text-lg mb-4">
-                    <i class="fas fa-download"></i><span>Download NeoBot-Setup.exe</span>
+                    <i class="fas fa-download"></i><span>Download Windows Installer</span>
                 </button>
-                <div class="text-center text-xs text-white/60 mt-2">Modern GUI • Silent mode • Auto Kali VM • UAC prompt</div>
-                <div class="text-center text-[10px] text-white/40 mt-1">25GB+ free space • Runs in background after you click Yes</div>
+                <div class="text-center text-xs text-white/60 mt-2">UAC Permission • Auto Kali VM Provision • Zero Clicks After Yes</div>
+                <div class="text-center text-[10px] text-white/40 mt-1">~25GB space • Runs fully autonomously after admin approval</div>
             </div>
 
             <!-- macOS -->
             <div onclick="selectPlatform('macos')" class="platform-card glass border border-white/10 hover:border-white rounded-3xl p-8 cursor-pointer" id="card-macos">
                 <div class="flex justify-between items-start mb-6">
                     <div><i class="fab fa-apple text-6xl"></i><div class="font-semibold text-3xl tracking-tight mt-4">macOS</div><div class="text-white/50 text-sm">Ventura • Sonoma • Sequoia</div></div>
-                    <div class="px-3 py-1 text-xs font-mono bg-white/10 text-white rounded-2xl self-start">Universal DMG</div>
                 </div>
                 <button onclick="event.stopImmediatePropagation(); downloadFile('macos')" class="download-btn w-full py-4 bg-white text-black font-bold rounded-2xl flex items-center justify-center gap-x-3 text-lg mb-4">
                     <i class="fas fa-download"></i><span>Download DMG</span>
@@ -105,7 +104,7 @@
 
     <footer class="border-t border-white/10 py-10 relative z-10">
         <div class="max-w-screen-2xl mx-auto px-8 text-center text-sm text-white/50">
-            <p>Windows installer is a signed .exe that asks for permission once, then completes everything autonomously (no manual steps).</p>
+            <p>Windows installer requests permission once to make changes to your device (UAC), then downloads & provisions everything autonomously — no further input needed.</p>
         </div>
     </footer>
 
@@ -126,35 +125,36 @@
         function downloadFile(platform) {
             const urls = {
                 linux: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage',
-                windows: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-Setup.exe',
+                windows: 'https://raw.githubusercontent.com/iofhouras/neobot/main/installer/NeoBot-Windows-Kali-VM-Setup.ps1',
                 macos: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.2.0.dmg'
             };
 
             if (platform === 'windows') {
                 const link = document.createElement('a');
                 link.href = urls.windows;
-                link.download = 'NeoBot-Setup.exe';
+                link.download = 'NeoBot-Windows-Installer.ps1';
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
 
                 setTimeout(() => {
                     const msg = document.createElement('div');
-                    msg.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0f172a;border:2px solid #00ff9d;color:#fff;padding:20px 28px;border-radius:20px;font-size:15px;box-shadow:0 20px 60px rgba(0,255,157,0.25);z-index:99999;max-width:460px;text-align:left;line-height:1.5;';
+                    msg.style.cssText = 'position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:#0f172a;border:2px solid #00ff9d;color:#fff;padding:20px 28px;border-radius:20px;font-size:15px;box-shadow:0 20px 60px rgba(0,255,157,0.25);z-index:99999;max-width:480px;text-align:left;line-height:1.5;';
                     msg.innerHTML = `
                         <div style="display:flex;align-items:center;gap:12px;margin-bottom:12px;">
                             <i class="fas fa-check-circle" style="color:#00ff9d;font-size:22px;"></i>
-                            <strong style="color:#00ff9d;font-size:17px;">NeoBot-Setup.exe downloaded successfully!</strong>
+                            <strong style="color:#00ff9d;font-size:17px;">NeoBot-Windows-Installer.ps1 downloaded successfully!</strong>
                         </div>
                         <div style="color:#cbd5e1;font-size:14px;">
-                            1. <strong>Double-click</strong> the file (or right-click → "Run as administrator" if prompted).<br>
-                            2. Windows will show: <strong>"Do you want to allow this app to make changes to your device?"</strong><br>
-                            3. Click <strong>Yes</strong> — the installer will then run completely autonomously.<br><br>
-                            <span style="color:#64748b;font-size:12px;">It will install NeoBot + provision your Kali Linux VM in the background with zero further input.</span>
+                            <strong>The program will now begin to download and install on your device.</strong><br><br>
+                            1. <strong>Double-click</strong> the downloaded .ps1 file (or right-click → "Run with PowerShell").<br>
+                            2. Windows UAC will prompt: <strong>"Do you want to allow this app to make changes to your device?"</strong><br>
+                            3. Click <strong>Yes</strong> — it auto-elevates, downloads Kali OVA (~4.5GB if needed), creates your VM, and launches everything autonomously.<br><br>
+                            <span style="color:#64748b;font-size:12px;">Zero further input required. Your NeoBot Kali VM will be ready in ~10-40 minutes.</span>
                         </div>
                     `;
                     document.body.appendChild(msg);
-                    setTimeout(() => { msg.style.transition = 'all 0.4s'; msg.style.opacity = '0'; setTimeout(() => msg.remove(), 400); }, 14000);
+                    setTimeout(() => { msg.style.transition = 'all 0.4s'; msg.style.opacity = '0'; setTimeout(() => msg.remove(), 400); }, 16000);
                 }, 650);
                 return;
             }
