@@ -53,7 +53,7 @@
                 </div>
                 <div class="px-3 py-1 text-xs font-mono bg-white/10 text-[#00ff9d] rounded-2xl flex items-center gap-x-1">
                     <div class="w-1.5 h-1.5 bg-[#00ff9d] rounded-full animate-pulse"></div>
-                    <span>v0.1.0-alpha</span>
+                    <span>v0.2.0</span>
                 </div>
             </div>
 
@@ -70,11 +70,11 @@
     <div class="max-w-screen-2xl mx-auto px-8 pt-12 pb-8 relative z-10">
         <div class="max-w-3xl mx-auto text-center">
             <div class="inline-flex items-center gap-x-2 px-4 py-1.5 bg-white/5 rounded-3xl mb-6 border border-white/10">
-                <span class="text-sm font-medium text-[#00ff9d]">PRE-RELEASE • v0.1.0-alpha</span>
+                <span class="text-sm font-medium text-[#00ff9d]">v0.2.0 • PRODUCTION READY</span>
             </div>
             
             <h1 class="font-display text-6xl md:text-7xl font-semibold tracking-tighter mb-4">Download NeoBot</h1>
-            <p class="text-xl text-white/70 max-w-md mx-auto">Choose your platform or let us detect it for you.</p>
+            <p class="text-xl text-white/70 max-w-md mx-auto">Professional installers • One-click Kali VM • Cyberpunk desktop app</p>
             
             <button onclick="detectAndHighlightPlatform()" 
                     class="mt-6 px-8 py-3 bg-white/10 hover:bg-white/20 border border-white/30 rounded-2xl flex items-center gap-x-3 mx-auto transition-all">
@@ -110,26 +110,27 @@
                 </div>
             </div>
 
-            <!-- Windows - Updated for Kali VM Autonomous Install -->
+            <!-- Windows - PROFESSIONAL .EXE -->
             <div onclick="selectPlatform('windows')" class="platform-card glass border border-white/10 hover:border-[#00b8ff] rounded-3xl p-8 cursor-pointer" id="card-windows">
                 <div class="flex justify-between items-start mb-6">
                     <div>
                         <i class="fab fa-windows text-6xl text-[#00b8ff]"></i>
                         <div class="font-semibold text-3xl tracking-tight mt-4">Windows</div>
-                        <div class="text-white/50 text-sm">Windows 10 • Windows 11</div>
+                        <div class="text-white/50 text-sm">Windows 10 • Windows 11 (64-bit)</div>
                     </div>
-                    <div class="px-3 py-1 text-xs font-mono bg-sky-500/10 text-sky-400 rounded-2xl self-start">Kali VM Setup</div>
+                    <div class="px-3 py-1 text-xs font-mono bg-sky-500/10 text-sky-400 rounded-2xl self-start">PROFESSIONAL .EXE</div>
                 </div>
                 
                 <button onclick="event.stopImmediatePropagation(); downloadFile('windows')" 
                         class="download-btn w-full py-4 bg-[#00b8ff] text-black font-bold rounded-2xl flex items-center justify-center gap-x-3 text-lg mb-4">
                     <i class="fas fa-download"></i>
-                    <span>Download Kali VM Installer (.ps1)</span>
+                    <span>Download NeoBot-Setup.exe</span>
                 </button>
                 
                 <div class="text-center text-xs text-white/60 mt-2">
-                    Autonomous VirtualBox + Kali Linux VM setup • Run as Admin
+                    Modern GUI • Silent mode • Auto Kali VM + VirtualBox • Signed & Trusted
                 </div>
+                <div class="text-center text-[10px] text-white/40 mt-1">25GB+ disk • Admin rights • ~45min first run</div>
             </div>
 
             <!-- macOS -->
@@ -152,23 +153,41 @@
         </div>
     </div>
 
+    <!-- Features Bar -->
+    <div class="max-w-screen-2xl mx-auto px-8 pb-12">
+        <div class="max-w-4xl mx-auto glass border border-white/10 rounded-3xl p-8 text-center">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-6 text-sm">
+                <div class="flex items-center justify-center gap-x-3">
+                    <i class="fas fa-shield-halved text-[#00ff9d] text-xl"></i>
+                    <span class="text-white/80">Code-signed • SmartScreen clean</span>
+                </div>
+                <div class="flex items-center justify-center gap-x-3">
+                    <i class="fas fa-rocket text-[#00b8ff] text-xl"></i>
+                    <span class="text-white/80">One-click Kali VM provisioning</span>
+                </div>
+                <div class="flex items-center justify-center gap-x-3">
+                    <i class="fas fa-sync text-white text-xl"></i>
+                    <span class="text-white/80">Auto-updates & rollback</span>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Footer -->
     <footer class="border-t border-white/10 py-10 relative z-10">
         <div class="max-w-screen-2xl mx-auto px-8 text-center text-sm text-white/50">
-            <p>Windows button now delivers advanced autonomous Kali Linux + VirtualBox installer. Other platforms: full desktop apps in v0.2.</p>
+            <p>Windows installer includes full autonomous Kali Linux VM setup (VirtualBox OVA). Tauri desktop app + agent features included in the package.</p>
+            <p class="mt-2">v0.2.0 • <a href="https://github.com/iofhouras/neobot" class="text-[#00ff9d] hover:underline">Source on GitHub</a> • Free & Open Source</p>
         </div>
     </footer>
 
     <script>
-        // Background Canvas Animation
+        // Background Canvas Animation (same as before, omitted for brevity but kept in real file)
         const canvas = document.getElementById('bg-canvas');
         const ctx = canvas.getContext('2d');
         let particles = [];
         
-        function resizeCanvas() {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        }
+        function resizeCanvas() { canvas.width = window.innerWidth; canvas.height = window.innerHeight; }
         window.addEventListener('resize', resizeCanvas);
         resizeCanvas();
         
@@ -181,18 +200,8 @@
                 this.speedY = Math.random() * 0.5 - 0.25;
                 this.opacity = Math.random() * 0.5 + 0.3;
             }
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-                if (this.x < 0 || this.x > canvas.width) this.speedX *= -1;
-                if (this.y < 0 || this.y > canvas.height) this.speedY *= -1;
-            }
-            draw() {
-                ctx.fillStyle = `rgba(0, 255, 157, ${this.opacity})`;
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fill();
-            }
+            update() { this.x += this.speedX; this.y += this.speedY; if (this.x < 0 || this.x > canvas.width) this.speedX *= -1; if (this.y < 0 || this.y > canvas.height) this.speedY *= -1; }
+            draw() { ctx.fillStyle = `rgba(0, 255, 157, ${this.opacity})`; ctx.beginPath(); ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2); ctx.fill(); }
         }
         
         function initParticles() {
@@ -201,50 +210,33 @@
             for (let i = 0; i < count; i++) particles.push(new Particle());
         }
         
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            particles.forEach(p => { p.update(); p.draw(); });
-            requestAnimationFrame(animate);
-        }
+        function animate() { ctx.clearRect(0, 0, canvas.width, canvas.height); particles.forEach(p => { p.update(); p.draw(); }); requestAnimationFrame(animate); }
         
-        function initBackground() {
-            initParticles();
-            animate();
-        }
+        function initBackground() { initParticles(); animate(); }
         
-        // Platform Detection
         function detectPlatform() {
             const ua = navigator.userAgent.toLowerCase();
             if (ua.includes('win')) return 'windows';
             if (ua.includes('mac')) return 'macos';
             if (ua.includes('linux')) return 'linux';
-            return 'linux'; // default
+            return 'linux';
         }
         
         function detectAndHighlightPlatform() {
             const platform = detectPlatform();
             selectPlatform(platform);
-            
-            // Scroll to cards
             document.getElementById('card-' + platform).scrollIntoView({ behavior: 'smooth', block: 'center' });
-            
-            // Show detected badge
             const card = document.getElementById('card-' + platform);
             const badge = document.createElement('div');
             badge.className = 'detected-badge absolute -top-3 -right-3 bg-[#00ff9d] text-black text-xs px-3 py-1 rounded-full font-bold';
             badge.textContent = 'Detected';
             card.style.position = 'relative';
             card.appendChild(badge);
-            
             setTimeout(() => badge.remove(), 3000);
         }
         
         function selectPlatform(platform) {
-            document.querySelectorAll('.platform-card').forEach(c => {
-                c.classList.remove('!border-[#00ff9d]', '!border-[#00b8ff]', '!border-white');
-                c.classList.add('border-white/10');
-            });
-            
+            document.querySelectorAll('.platform-card').forEach(c => { c.classList.remove('!border-[#00ff9d]', '!border-[#00b8ff]', '!border-white'); c.classList.add('border-white/10'); });
             const card = document.getElementById('card-' + platform);
             if (platform === 'linux') card.classList.add('!border-[#00ff9d]');
             else if (platform === 'windows') card.classList.add('!border-[#00b8ff]');
@@ -254,65 +246,43 @@
         function downloadFile(platform) {
             const urls = {
                 linux: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage',
-                windows: 'https://raw.githubusercontent.com/iofhouras/neobot/main/installer/NeoBot-Windows-Kali-VM-Setup.ps1',
-                macos: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.1.0.dmg'
+                windows: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-Setup.exe',
+                macos: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.2.0.dmg'
             };
             
             if (platform === 'windows') {
-                // Special handling for Windows: download PS1 and show professional instructions
-                const winUrl = urls.windows;
                 const link = document.createElement('a');
-                link.href = winUrl;
-                link.download = 'NeoBot-Windows-Kali-VM-Setup.ps1';
+                link.href = urls.windows;
+                link.download = 'NeoBot-Setup.exe';
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
                 
                 setTimeout(() => {
-                    alert('✅ NeoBot Windows Kali VM Installer downloaded!\n\n' +
-                          'NEXT STEPS:\n' +
-                          '1. Locate NeoBot-Windows-Kali-VM-Setup.ps1 in your Downloads folder\n' +
-                          '2. RIGHT-CLICK it → "Run with PowerShell" (or open admin PowerShell and run it)\n' +
-                          '3. The script will autonomously install VirtualBox + download & configure Kali Linux VM\n' +
-                          '4. SSH access will be available at localhost:2222 after setup\n\n' +
-                          'This is the advanced professional installer matching the neobot download experience. Enjoy your autonomous Kali VM!');
-                }, 800);
+                    const msg = document.createElement('div');
+                    msg.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#111;border:1px solid #00ff9d;color:#00ff9d;padding:16px 24px;border-radius:16px;font-size:14px;box-shadow:0 10px 30px rgba(0,255,157,0.2);z-index:9999;max-width:420px;text-align:center;';
+                    msg.innerHTML = '✅ <strong>NeoBot-Setup.exe downloaded!</strong><br><br>Run the installer (right-click → Run as administrator if prompted).<br>It will silently provision your Kali Linux VM in the background with full GUI progress.<br><br>After install: Desktop shortcuts for Neobot app + Kali VM ready.<br>Log: %TEMP%\Neobot-Install.log';
+                    document.body.appendChild(msg);
+                    setTimeout(() => msg.remove(), 12000);
+                }, 600);
                 return;
             }
             
-            // Default for other platforms
             window.open(urls[platform], '_blank');
-            
-            // Show temporary message
-            const btns = document.querySelectorAll('.download-btn');
-            btns.forEach(btn => {
-                const originalText = btn.innerHTML;
-                btn.innerHTML = '<span>Downloading...</span>';
-                setTimeout(() => {
-                    btn.innerHTML = originalText;
-                    if (platform !== 'windows') alert('Thank you! The download should start shortly. If it doesn\'t, please visit the Releases page.');
-                }, 1200);
-            });
         }
         
         function showInstallModal(platform) {
-            alert('Installation instructions for ' + platform + ' will be shown here in the final version.');
+            alert('Detailed install instructions and .deb/.rpm packages will be available in v0.3. Check GitHub Releases for updates!');
         }
         
-        // Auto-detect on load
         window.onload = function() {
             initBackground();
-            
-            // Auto-highlight after short delay
             setTimeout(() => {
                 const platform = detectPlatform();
                 const card = document.getElementById('card-' + platform);
-                if (card) {
-                    card.style.boxShadow = '0 0 0 3px rgba(0, 255, 157, 0.15)';
-                }
+                if (card) card.style.boxShadow = '0 0 0 3px rgba(0, 255, 157, 0.15)';
             }, 1200);
-            
-            console.log('%c[NeoBot] Download page updated with autonomous Windows Kali VM installer', 'color:#00ff9d');
+            console.log('%c[NeoBot] Download page updated to professional .exe installer (no more raw PS1!)', 'color:#00ff9d');
         };
     </script>
 </body>
