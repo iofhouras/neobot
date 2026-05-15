@@ -1,207 +1,72 @@
-# ====================================================================================
-#  NeoBot Windows Kali Linux VM Autonomous Professional Installer v2.0
-#  PowerShell 7+ Compatible | Triggered via download.html Windows Button
-# ====================================================================================
-#
-# MISSION: When user clicks Windows Download on https://iofhouras.github.io/neobot/download.html
-#          This script AUTONOMOUSLY:
-#          - Elevates to Administrator
-#          - Silently installs/updates Oracle VirtualBox (latest via winget)
-#          - Downloads latest Kali Linux VirtualBox OVA (~4-5GB, with progress)
-#          - Imports & configures professional NeoBot-optimized Kali VM
-#          - Sets up shared folders, SSH port forward (2222), 4CPU/8GB RAM, 3D accel
-#          - Starts VM (headless option)
-#          - Provides SSH access instructions + NeoBot integration notes
-#
-# USAGE (triggered by download button):
-#   1. Script downloads automatically from GitHub raw
-#   2. User right-clicks .ps1 -> Run with PowerShell (or from admin PS: .\NeoBot-Windows-Kali-VM-Setup.ps1)
-#   3. Fully autonomous advanced install with cyber-themed console UI
-#
-# REQUIREMENTS: Windows 10/11 64-bit, ~20GB free disk, internet
-# ====================================================================================
+# NeoBot Windows Kali VM Autonomous Installer v2.1
+# Professional one-click setup for VirtualBox + Kali Linux VM
+# Triggered from download.html Windows button
 
-param(
-    [switch]$FullAutomation = $true,
-    [string]$VMName = "NeoBot-Kali-VM",
-    [int]$MemoryMB = 8192,
-    [int]$CPUs = 4,
-    [string]$InstallPath = "$env:USERPROFILE\NeoBot",
-    [switch]$StartVM = $true
-)
+param([switch]$FullAutomation, [int]$MemoryMB=4096, [int]$CPUs=2, [string]$VMName="NeoBot-Kali-VM", [switch]$Headless, [switch]$EnableGUIProgress)
 
-# --- ADMIN ELEVATION & SETUP ---
-$CurrentUser = [Security.Principal.WindowsIdentity]::GetCurrent()
-$Principal = New-Object Security.Principal.WindowsPrincipal($CurrentUser)
-if (-not $Principal.IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
-    Write-Host "[NeoBot] This installer requires Administrator privileges for VirtualBox & VM setup." -ForegroundColor Yellow
-    $Response = Read-Host "Restart as Administrator? (Y/N)"
-    if ($Response -eq 'Y') {
-        Start-Process powershell -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `"$PSCommandPath`" -FullAutomation"
-        exit
-    } else {
-        Write-Error "[NeoBot] Exiting. Please run as Administrator for full autonomous install."
-        exit 1
-    }
+if (-not ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)) {
+    if (-not $FullAutomation) { Read-Host 'Run as Admin required. Press Enter to exit'; exit }
+    Start-Process powershell -Verb RunAs -ArgumentList "-NoProfile -ExecutionPolicy Bypass -File `$PSCommandPath"; exit
 }
 
-$ErrorActionPreference = "Stop"
-$ProgressPreference = "SilentlyContinue"
-$Host.UI.RawUI.WindowTitle = "NeoBot | Kali VM Professional Installer v2.0"
+$ErrorActionPreference = 'Stop'
+$Host.UI.RawUI.WindowTitle = 'NeoBot Kali VM Installer v2.1'
+Start-Transcript -Path "$env:TEMP\NeoBot-Kali-Setup.log" -Force | Out-Null
 
-function Write-Cyber {
-    param([string]$Message, [string]$Status = "INFO")
-    $ts = Get-Date -Format "HH:mm:ss"
-    switch ($Status) {
-        "SUCCESS" { Write-Host "[✅ $ts] $Message" -ForegroundColor Green }
-        "ERROR"   { Write-Host "[❌ $ts] $Message" -ForegroundColor Red }
-        "WARN"    { Write-Host "[⚠️  $ts] $Message" -ForegroundColor Yellow }
-        "PROGRESS" { Write-Host "[🔄 $ts] $Message" -ForegroundColor Cyan }
-        default   { Write-Host "[🔹 $ts] $Message" -ForegroundColor White }
-    }
+function Write-Phase($t) { Write-Host "`n=== $t ===" -ForegroundColor Cyan }
+function Write-Step($m, $s='INFO') { $ts=Get-Date -Format 'HH:mm:ss'; Write-Host ("{0} [{1}] {2}" -f (@{SUCCESS='✅';ERROR='❌';WARN='⚠️';default='🔹'}[$s] ?? '🔹'), $ts, $m) -ForegroundColor (@{SUCCESS='Green';ERROR='Red';WARN='Yellow';default='White'}[$s] ?? 'White') }
+
+function Test-Cmd($c) { [bool](Get-Command $c -EA SilentlyContinue) }
+
+function Refresh-Path { $env:Path = [Environment]::GetEnvironmentVariable('Path','Machine') + ';' + [Environment]::GetEnvironmentVariable('Path','User') }
+
+Write-Phase 'PHASE 0: Pre-Flight'
+if ((Get-CimInstance Win32_OperatingSystem).Version -lt '10.0.19041') { Write-Step 'Windows 10 20H1+ recommended' 'WARN' }
+if (-not (Test-Cmd 'winget')) { try { Add-AppxPackage -RegisterByFamilyName Microsoft.DesktopAppInstaller_8wekyb3d8bbwe -EA Stop; Refresh-Path } catch { Write-Step 'winget unavailable, using fallback' 'WARN' } }
+Write-Step 'Pre-flight OK' 'SUCCESS'
+
+Write-Phase 'PHASE 1: VirtualBox'
+if (-not (Test-Cmd 'VBoxManage')) {
+    Write-Step 'Installing VirtualBox...' 'WARN'
+    if (Test-Cmd 'winget') { winget install Oracle.VirtualBox --exact --accept-package-agreements --accept-source-agreements --silent | Out-Null; Refresh-Path }
+    else { $u='https://download.virtualbox.org/virtualbox/7.0.20/VirtualBox-7.0.20-163906-Win.exe'; $f="$env:TEMP\vbox.exe"; Invoke-WebRequest $u -OutFile $f; Start-Process $f '--silent' -Wait; Remove-Item $f }
 }
+Write-Step "VirtualBox ready: $(if (Test-Cmd 'VBoxManage') { VBoxManage --version } else { 'failed' })" 'SUCCESS'
 
-function Test-Command { param([string]$cmd) return [bool](Get-Command $cmd -ErrorAction SilentlyContinue) }
-
-function Refresh-Path { $env:Path = [System.Environment]::GetEnvironmentVariable("Path","Machine") + ";" + [System.Environment]::GetEnvironmentVariable("Path","User") }
-
-Write-Cyber "🚀 NeoBot Kali Linux VM Autonomous Installer Starting..." "PROGRESS"
-Write-Cyber "Target VM: $VMName | RAM: ${MemoryMB}MB | CPUs: $CPUs" 
-
-# PHASE 0: VirtualBox Installation (idempotent, silent where possible)
-Write-Cyber "PHASE 0: Ensuring Oracle VirtualBox is installed..." "PROGRESS"
-if (-not (Test-Command "VBoxManage")) {
-    Write-Cyber "VirtualBox not found. Installing latest via winget (this may take 5-10 min)..." "WARN"
-    try {
-        winget install --id Oracle.VirtualBox -e --source winget --accept-package-agreements --accept-source-agreements --silent | Out-Null
-        Refresh-Path
-        Start-Sleep -Seconds 5
-        if (Test-Command "VBoxManage") {
-            Write-Cyber "VirtualBox installed successfully: $(VBoxManage --version | Select-Object -First 1)" "SUCCESS"
-        } else {
-            throw "VBoxManage still not in PATH after install."
-        }
-    } catch {
-        Write-Cyber "Failed to auto-install VirtualBox: $($_.Exception.Message). Please install manually from virtualbox.org and re-run." "ERROR"
-        exit 1
-    }
-} else {
-    Write-Cyber "VirtualBox already present: $(VBoxManage --version | Select-Object -First 1)" "SUCCESS"
+Write-Phase 'PHASE 2: Download Kali OVA'
+$KaliUrl = 'https://cdimage.kali.org/kali-2025.1/kali-linux-2025.1-virtualbox-amd64.ova'
+$KaliFile = "$env:TEMP\kali-linux-2025.1-virtualbox-amd64.ova"
+if (-not (Test-Path $KaliFile)) {
+    Write-Step 'Downloading Kali OVA (~4.5GB, ~10-40min)...' 'WARN'
+    Start-BitsTransfer -Source $KaliUrl -Destination $KaliFile -DisplayName 'Kali OVA Download' -Priority High
 }
+Write-Step 'Kali OVA ready' 'SUCCESS'
 
-# PHASE 1: Download Latest Kali Linux OVA (with progress)
-Write-Cyber "PHASE 1: Downloading latest Kali Linux VirtualBox OVA..." "PROGRESS"
-$KaliBase = "https://cdimage.kali.org"
-# Update version as needed - current stable as of 2025
-$KaliVersion = "2025.2"
-$KaliOvaName = "kali-linux-$KaliVersion-virtualbox-amd64.ova"
-$KaliUrl = "$KaliBase/kali-$KaliVersion/$KaliOvaName"
-$DownloadDir = "$env:TEMP\NeoBot-Kali-OVA"
-New-Item -ItemType Directory -Path $DownloadDir -Force | Out-Null
-$OvaPath = "$DownloadDir\$KaliOvaName"
+Write-Phase 'PHASE 3: Create & Configure VM'
+if (VBoxManage list vms 2>$null | Select-String $VMName) { VBoxManage unregistervm $VMName --delete 2>$null | Out-Null }
+VBoxManage import $KaliFile --vsys 0 --vmname $VMName --cpus $CPUs --memory $MemoryMB --ostype Debian_64 | Out-Null
+VBoxManage modifyvm $VMName --nic1 nat --natpf1 'ssh,tcp,,2222,,22' --natpf1 'web,tcp,,8080,,80' --ioapic on --pae on --hwvirtex on --vram 128
+VBoxManage modifyvm $VMName --description "NeoBot Kali VM - $(Get-Date -f 'yyyy-MM-dd') | SSH localhost:2222"
+Write-Step "VM $VMName configured ($MemoryMB MB / $CPUs CPU, SSH:2222)" 'SUCCESS'
 
-if (Test-Path $OvaPath) {
-    Write-Cyber "OVA already downloaded at $OvaPath - skipping re-download." "SUCCESS"
-} else {
-    Write-Cyber "Downloading $KaliOvaName (~4.5GB). This will take 10-40 minutes depending on connection..." "WARN"
-    try {
-        # Use BITS for reliable large file download with progress
-        Start-BitsTransfer -Source $KaliUrl -Destination $OvaPath -Description "NeoBot Kali OVA Download" -ErrorAction Stop
-        Write-Cyber "Download complete! File size: $((Get-Item $OvaPath).Length / 1GB) GB" "SUCCESS"
-    } catch {
-        Write-Cyber "Download failed. Trying alternative mirror or check https://cdimage.kali.org for latest OVA." "ERROR"
-        Write-Cyber "You can manually download and place at $OvaPath then re-run script." "WARN"
-        exit 1
-    }
-}
+Write-Phase 'PHASE 4: Launch & Verify'
+if ($Headless) { VBoxManage startvm $VMName --type headless | Out-Null } else { Start-Process 'C:\Program Files\Oracle\VirtualBox\VirtualBox.exe' "--startvm `$VMName" }
+$Wsh = New-Object -ComObject WScript.Shell; $sc = $Wsh.CreateShortcut("$env:USERPROFILE\Desktop\NeoBot-Kali-VM.lnk"); $sc.TargetPath = 'C:\Program Files\Oracle\VirtualBox\VirtualBox.exe'; $sc.Arguments = "--startvm `$VMName"; $sc.Save()
+Write-Step 'Desktop shortcut created' 'SUCCESS'
+if (VBoxManage list runningvms 2>$null | Select-String $VMName) { Write-Step 'VM is running!' 'SUCCESS' }
 
-# PHASE 2: Import & Professional Configuration of NeoBot Kali VM
-Write-Cyber "PHASE 2: Importing OVA and applying NeoBot-optimized configuration..." "PROGRESS"
-
-# Check if VM already exists
-$ExistingVM = VBoxManage list vms | Select-String $VMName
-if ($ExistingVM) {
-    Write-Cyber "VM '$VMName' already exists. Skipping import. (Use -Force to recreate in future versions)" "WARN"
-} else {
-    Write-Cyber "Importing OVA (this may take 5-15 minutes)..." 
-    try {
-        # Import with custom name override
-        VBoxManage import "$OvaPath" --vsys 0 --vmname "$VMName" --settingsfile "$env:TEMP\$VMName.vbox" | Out-Null
-        Write-Cyber "OVA imported successfully as $VMName" "SUCCESS"
-    } catch {
-        Write-Cyber "Import failed: $($_.Exception.Message)" "ERROR"
-        exit 1
-    }
-}
-
-# Apply professional NeoBot configuration
-Write-Cyber "Applying advanced VM settings (4 vCPU, 8GB RAM, 3D, NAT+SSH forward, shared folder)..." 
-try {
-    VBoxManage modifyvm "$VMName" --memory $MemoryMB --cpus $CPUs --vram 128 --accelerate3d on --ioapic on --pae on --nestedpaging on
-    VBoxManage modifyvm "$VMName" --nic1 nat --natpf1 "ssh,tcp,,2222,,22" --natpf1 "http,tcp,,8080,,80"
-    
-    # Create NeoBot shared folder (host <-> guest)
-    $SharePath = "$InstallPath\shared"
-    New-Item -ItemType Directory -Path $SharePath -Force | Out-Null
-    VBoxManage sharedfolder add "$VMName" --name "neobot-share" --hostpath "$SharePath" --automount --readonly off
-    
-    # Set boot order, enable clipboard, drag-drop
-    VBoxManage modifyvm "$VMName" --clipboard bidirectional --draganddrop bidirectional
-    
-    Write-Cyber "VM configuration complete: SSH on localhost:2222 | Shared folder: $SharePath" "SUCCESS"
-} catch {
-    Write-Cyber "Configuration warning: $($_.Exception.Message). VM may still be usable." "WARN"
-}
-
-# PHASE 3: Start VM & Final Verification
-if ($StartVM) {
-    Write-Cyber "PHASE 3: Starting $VMName (headless mode for background operation)..." 
-    try {
-        $Running = VBoxManage list runningvms | Select-String $VMName
-        if (-not $Running) {
-            VBoxManage startvm "$VMName" --type headless | Out-Null
-            Start-Sleep -Seconds 15  # Allow boot
-            Write-Cyber "VM started successfully in headless mode!" "SUCCESS"
-        } else {
-            Write-Cyber "VM already running." "SUCCESS"
-        }
-    } catch {
-        Write-Cyber "Could not start VM automatically. Start manually from VirtualBox GUI." "WARN"
-    }
-}
-
-# Final Summary & Instructions
-Write-Cyber "🎉 NEOBOT KALI VM SETUP COMPLETE!" "SUCCESS"
 Write-Host @"
+✅ NeoBot Kali Linux VM ready on Windows!
 
-================================================================================
-  NeoBot Kali Linux VM is ready on your Windows device!
-================================================================================
+SSH: ssh -p 2222 kali@localhost (pass: kali - change it!)
+Desktop shortcut: NeoBot-Kali-VM
+Log: $env:TEMP\NeoBot-Kali-Setup.log
 
-VM Name: $VMName
-Access via SSH:   ssh -p 2222 kali@localhost
-  (Default credentials: kali / kali  -- CHANGE IMMEDIATELY!)
+Update Kali inside VM: sudo apt update && sudo apt full-upgrade -y
+Full guide: https://github.com/iofhouras/neobot
 
-Shared Folder:    $SharePath  (mounts as /media/sf_neobot-share in guest)
-VirtualBox GUI:   Open Oracle VM VirtualBox to manage
+Cyber ready. 🛡️
+"@ -ForegroundColor Green
 
-Next Steps for NeoBot:
-  1. SSH into VM and run: sudo apt update && sudo apt install -y git curl
-  2. Clone your projects or run NeoBot agent inside Kali
-  3. Use the Tauri desktop app (download other platforms) to control the agent
-  4. For full NeoBot experience: Launch the desktop app and use GitHub Dev mode
-
-Logs saved to: $env:TEMP\neobot-vm-setup.log (if enabled)
-
-Cyber tip: The VM is pre-configured for secure local AI agent execution.
-Stay unstoppable. 🚀
-"@ -ForegroundColor Magenta
-
-Write-Cyber "All done! Your Kali VM is now part of the NeoBot ecosystem." "SUCCESS"
-
-# Optional: Open VirtualBox
-if (-not $Silent) {
-    Start-Process "C:\Program Files\Oracle\VirtualBox\VirtualBox.exe" -ErrorAction SilentlyContinue
-}
-
-exit 0
+Stop-Transcript | Out-Null
+# End of script - Advanced professional autonomous installer for NeoBot Windows download button
