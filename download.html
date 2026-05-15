@@ -34,6 +34,9 @@
         .glitch { animation: glitch 2s infinite; }
         @keyframes glitch { 0% { transform: translate(0); } 20% { transform: translate(-2px, 2px); } 40% { transform: translate(-2px, -2px); } 60% { transform: translate(2px, 2px); } 80% { transform: translate(2px, -2px); } 100% { transform: translate(0); } }
         .vm-container { border: 2px solid #00ff9d; box-shadow: 0 0 30px #00ff9d; }
+        .control-panel { animation: panelPop 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
+        @keyframes panelPop { from { transform: scale(0.8) translateY(40px); opacity: 0; } to { transform: scale(1) translateY(0); opacity: 1; } }
+        .neon-border { border: 1px solid #00ff9d; box-shadow: 0 0 15px rgba(0, 255, 157, 0.5); }
     </style>
 </head>
 <body class="cyber-bg text-white overflow-x-hidden">
@@ -173,7 +176,7 @@
                 <div class="text-center text-[10px] text-white/50 mt-3">~180MB • Works on any modern distro</div>
             </div>
 
-            <!-- Windows Card (v3.0.0 RELEASE — GitHub Releases powered) -->
+            <!-- Windows Card -->
             <div onclick="selectPlatform('windows')" class="platform-card glass border border-white/10 hover:border-[#00b8ff] rounded-3xl p-8 cursor-pointer group" id="card-windows">
                 <div class="flex justify-between items-start mb-8">
                     <div>
@@ -195,7 +198,7 @@
                         class="download-btn w-full py-4 bg-[#00b8ff] text-black font-extrabold rounded-2xl flex items-center justify-center gap-x-3 text-lg active:scale-[0.97]">
                     <i class="fas fa-download"></i> <span>DOWNLOAD FOR WINDOWS v3.0.0</span>
                 </button>
-                <div class="text-center text-[10px] text-white/50 mt-3">~4.2MB • Direct from GitHub Release • Auto UAC + install</div>
+                <div class="text-center text-[10px] text-white/50 mt-3">~4.2MB • Mock Download + VM Control Panel</div>
             </div>
 
             <!-- macOS Card -->
@@ -418,10 +421,187 @@
 
     <footer class="border-t border-white/10 py-12 text-center text-xs text-white/50">
         <div class="max-w-screen-2xl mx-auto px-8">
-            <p>NeoBot v3.0.0 is free for ethical use. Windows installer powered by GitHub Releases for instant, reliable downloads. Full UAC elevation for system changes. All assets code-signed. <a href="https://github.com/iofhouras/neobot" class="hover:text-white underline">Source on GitHub</a></p>
+            <p>NeoBot v3.0.0 is free for ethical use. Windows installer powered by GitHub Releases. Full UAC elevation. All assets code-signed. <a href="https://github.com/iofhouras/neobot" class="hover:text-white underline">Source on GitHub</a></p>
             <p class="mt-2">© 2026 iofhouras • Built for the offensive security community</p>
         </div>
     </footer>
+
+    <!-- MOCK DOWNLOAD PROGRESS MODAL -->
+    <div id="download-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-xl z-[100] flex items-center justify-center">
+        <div class="glass neon-border max-w-md w-full mx-4 p-8 rounded-3xl">
+            <div class="text-center">
+                <div class="w-16 h-16 mx-auto mb-6 bg-gradient-to-br from-[#00b8ff] to-[#00ff9d] rounded-2xl flex items-center justify-center">
+                    <i class="fas fa-download text-black text-4xl animate-bounce"></i>
+                </div>
+                <h3 class="font-display text-3xl mb-2">Downloading NeoBot v3.0.0</h3>
+                <p class="text-white/70 mb-6">Professional Windows Installer • 4.2 MB</p>
+                
+                <div class="w-full bg-white/10 rounded-full h-3 mb-2 overflow-hidden">
+                    <div id="progress-bar" class="h-3 bg-gradient-to-r from-[#00ff9d] to-[#00b8ff] rounded-full transition-all duration-300" style="width: 0%"></div>
+                </div>
+                <div class="flex justify-between text-xs text-white/60 mb-6">
+                    <span id="progress-text">0%</span>
+                    <span>4.2 MB / 4.2 MB</span>
+                </div>
+                
+                <div class="text-xs text-white/50">GitHub Releases • Secure & Verified</div>
+            </div>
+        </div>
+    </div>
+
+    <!-- NEOBOT VM CONTROL PANEL MODAL -->
+    <div id="control-panel-modal" class="hidden fixed inset-0 bg-black/90 backdrop-blur-xl z-[110] flex items-center justify-center p-4">
+        <div class="control-panel glass neon-border max-w-5xl w-full max-h-[92vh] overflow-y-auto rounded-3xl">
+            <!-- Panel Header -->
+            <div class="sticky top-0 bg-[#0a0a0a]/95 border-b border-white/10 px-8 py-5 flex items-center justify-between z-10">
+                <div class="flex items-center gap-4">
+                    <div class="w-10 h-10 bg-gradient-to-br from-[#00ff9d] to-[#00b8ff] rounded-2xl flex items-center justify-center">
+                        <i class="fas fa-desktop text-black text-xl"></i>
+                    </div>
+                    <div>
+                        <div class="font-display text-3xl">NeoBot VM Control Panel</div>
+                        <div class="text-xs text-[#00ff9d] font-mono">v3.0.0 • Kali Linux 2025.1 + AI Agent</div>
+                    </div>
+                </div>
+                <div class="flex items-center gap-3">
+                    <div id="vm-status" class="px-4 py-1.5 text-sm font-mono bg-emerald-500/10 text-emerald-400 rounded-2xl border border-emerald-500/30 flex items-center gap-2">
+                        <div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div>
+                        <span>VM STATUS: STOPPED</span>
+                    </div>
+                    <button onclick="closeControlPanel()" class="w-10 h-10 flex items-center justify-center text-white/70 hover:text-white hover:bg-white/10 rounded-2xl transition-all">
+                        <i class="fas fa-times text-xl"></i>
+                    </button>
+                </div>
+            </div>
+
+            <div class="p-8 grid md:grid-cols-2 gap-8">
+                <!-- Hardware Configuration -->
+                <div class="glass p-6 rounded-2xl border border-white/10">
+                    <div class="flex items-center gap-3 mb-5">
+                        <i class="fas fa-microchip text-[#00b8ff] text-xl"></i>
+                        <div class="font-semibold text-xl">Hardware Resources</div>
+                    </div>
+                    
+                    <div class="space-y-6">
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>RAM</span>
+                                <span id="ram-value" class="font-mono text-[#00ff9d]">6144 MB</span>
+                            </div>
+                            <input type="range" id="ram-slider" min="4096" max="16384" step="512" value="6144" 
+                                   class="w-full accent-[#00ff9d]" oninput="updateRamValue(this.value)">
+                            <div class="flex justify-between text-[10px] text-white/50 mt-1"><span>4 GB</span><span>16 GB</span></div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>vCPUs</span>
+                                <span id="cpu-value" class="font-mono text-[#00ff9d]">4</span>
+                            </div>
+                            <input type="range" id="cpu-slider" min="2" max="8" step="1" value="4" 
+                                   class="w-full accent-[#00ff9d]" oninput="updateCpuValue(this.value)">
+                            <div class="flex justify-between text-[10px] text-white/50 mt-1"><span>2 cores</span><span>8 cores</span></div>
+                        </div>
+                        
+                        <div>
+                            <div class="flex justify-between text-sm mb-2">
+                                <span>Video Memory (VRAM)</span>
+                                <span id="vram-value" class="font-mono text-[#00ff9d]">256 MB</span>
+                            </div>
+                            <input type="range" id="vram-slider" min="64" max="512" step="32" value="256" 
+                                   class="w-full accent-[#00ff9d]" oninput="updateVramValue(this.value)">
+                            <div class="flex justify-between text-[10px] text-white/50 mt-1"><span>64 MB</span><span>512 MB</span></div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Network & Shared Folders -->
+                <div class="glass p-6 rounded-2xl border border-white/10">
+                    <div class="flex items-center gap-3 mb-5">
+                        <i class="fas fa-network-wired text-[#00b8ff] text-xl"></i>
+                        <div class="font-semibold text-xl">Network & Sharing</div>
+                    </div>
+                    
+                    <div class="mb-5">
+                        <div class="text-sm mb-2">Port Forwards</div>
+                        <div class="space-y-2 text-sm">
+                            <div class="flex items-center justify-between bg-white/5 px-3 py-2 rounded-xl">
+                                <span>SSH</span> <span class="font-mono text-[#00ff9d]">localhost:2222 → 22</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-white/5 px-3 py-2 rounded-xl">
+                                <span>Web</span> <span class="font-mono text-[#00ff9d]">localhost:8080 → 80</span>
+                            </div>
+                            <div class="flex items-center justify-between bg-white/5 px-3 py-2 rounded-xl">
+                                <span>HTTPS</span> <span class="font-mono text-[#00ff9d]">localhost:8443 → 443</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <div class="text-sm mb-2">Shared Folders</div>
+                        <div id="shared-folders-list" class="space-y-2 text-sm mb-3">
+                            <div class="flex items-center justify-between bg-white/5 px-3 py-2 rounded-xl">
+                                <span>~/NeoBot-Shared</span> <span class="text-emerald-400 text-xs">Auto-mounted</span>
+                            </div>
+                        </div>
+                        <button onclick="addSharedFolder()" class="text-xs px-4 py-2 border border-white/30 hover:bg-white/5 rounded-xl flex items-center gap-2">
+                            <i class="fas fa-plus"></i> <span>Add Shared Folder</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- AI Agent Configuration -->
+                <div class="glass p-6 rounded-2xl border border-white/10 md:col-span-2">
+                    <div class="flex items-center gap-3 mb-5">
+                        <i class="fas fa-robot text-[#00ff9d] text-xl"></i>
+                        <div class="font-semibold text-xl">Autonomous AI Pentesting Agent</div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-3 gap-6">
+                        <div class="space-y-4">
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">Autonomous Mode</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-white/20 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#00ff9d] rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#00ff9d]"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">Telegram Bridge</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" checked class="sr-only peer">
+                                    <div class="w-11 h-6 bg-white/20 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#00ff9d] rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#00ff9d]"></div>
+                                </label>
+                            </div>
+                            <div class="flex items-center justify-between">
+                                <span class="text-sm">WhatsApp Bridge</span>
+                                <label class="relative inline-flex items-center cursor-pointer">
+                                    <input type="checkbox" class="sr-only peer">
+                                    <div class="w-11 h-6 bg-white/20 peer-focus:outline-none peer-focus:ring-2 peer-focus:ring-[#00ff9d] rounded-full peer peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#00ff9d]"></div>
+                                </label>
+                            </div>
+                        </div>
+                        
+                        <div class="md:col-span-2">
+                            <div class="text-sm mb-2">Agent Sensitivity</div>
+                            <input type="range" min="1" max="10" step="1" value="7" class="w-full accent-[#00ff9d]">
+                            <div class="flex justify-between text-[10px] text-white/50"><span>Conservative</span><span>Aggressive</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="sticky bottom-0 bg-[#0a0a0a]/95 border-t border-white/10 px-8 py-5 flex flex-col md:flex-row gap-4 justify-end">
+                <button onclick="applyConfiguration()" class="px-8 py-3.5 border border-white/30 hover:bg-white/5 rounded-2xl font-medium flex items-center justify-center gap-3">
+                    <i class="fas fa-save"></i> <span>Apply Configuration</span>
+                </button>
+                <button onclick="startVM()" class="px-10 py-3.5 bg-[#00ff9d] hover:bg-white text-black font-extrabold rounded-2xl flex items-center justify-center gap-3 shadow-[0_0_25px_#00ff9d]">
+                    <i class="fas fa-play"></i> <span>LAUNCH VM NOW</span>
+                </button>
+            </div>
+        </div>
+    </div>
 
     <script>
         // Tailwind script
@@ -556,13 +736,8 @@
             const platform = detectPlatform();
             selectPlatform(platform);
             
-            // Also trigger a subtle confetti burst
             if (window.confetti) {
-                confetti({
-                    particleCount: 80,
-                    spread: 70,
-                    origin: { y: 0.6 }
-                });
+                confetti({ particleCount: 80, spread: 70, origin: { y: 0.6 } });
             }
             
             setTimeout(() => {
@@ -570,82 +745,143 @@
             }, 450);
         }
 
-        // Download logic — NOW POWERED BY GITHUB RELEASES v3.0.0 (triggers direct download like regular apps)
+        // === NEW: MOCK DOWNLOAD + CONTROL PANEL ===
         function downloadFile(platform) {
-            const urls = {
-                linux: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage',
-                windows: 'https://github.com/iofhouras/neobot/releases/download/v3.0.0/NeoBot-Windows-Professional-Setup.bat',
-                macos: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.2.0.dmg'
-            };
-
             if (platform === 'windows') {
-                // Professional confirmation before triggering GitHub Release download
-                const confirmed = confirm('NeoBot Windows Installer v3.0.0\n\nThis GitHub Release asset will:\n• Start downloading instantly from GitHub Releases (like regular apps)\n• Request FULL Administrator permission (UAC) to make changes to your device\n• Install VirtualBox, download Kali OVA, create VM, configure networking\n• Enable AI Agent & shared folders\n\nClick OK to proceed — GitHub will handle the secure download. Cancel to abort.');
-                if (!confirmed) return;
-
-                const link = document.createElement('a');
-                link.href = urls.windows;
-                link.download = 'NeoBot-Windows-Professional-Setup.bat';
-                document.body.appendChild(link);
-                link.click();
-                document.body.removeChild(link);
-
-                // Confetti celebration
-                if (window.confetti) {
-                    confetti({
-                        particleCount: 200,
-                        spread: 100,
-                        origin: { y: 0.7 }
-                    });
-                    setTimeout(() => confetti({ particleCount: 120, angle: 60, spread: 55, origin: { x: 0.1 } }), 280);
-                }
-
-                setTimeout(() => {
-                    const msg = document.createElement('div');
-                    msg.style.cssText = 'position:fixed;bottom:28px;left:50%;transform:translateX(-50%);background:#0f172a;border:2px solid #00ff9d;color:#fff;padding:24px 32px;border-radius:24px;font-size:15px;box-shadow:0 25px 70px rgba(0,255,157,0.3);z-index:999999;max-width:520px;text-align:left;line-height:1.55;';
-                    msg.innerHTML = `
-                        <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
-                            <i class="fas fa-check-circle" style="color:#00ff9d;font-size:26px;"></i>
-                            <strong style="color:#00ff9d;font-size:18px;">v3.0.0 Release Download Started!</strong>
-                        </div>
-                        <div style="color:#cbd5e1;font-size:14.5px;">
-                            <strong>GitHub Releases is now delivering your installer:</strong><br><br>
-                            1. Download completes automatically (progress shown by browser)<br>
-                            2. <strong>Double-click</strong> the .bat — it auto-elevates with UAC
-                            3. Click <strong>Yes</strong> on the permission prompt for full system changes<br>
-                            4. Kali VM + AI Agent ready in 10-40 mins.<br><br>
-                            <span style="color:#64748b;font-size:12.5px;">Thank you for downloading NeoBot v3.0.0 — the professional way via GitHub Releases.</span>
-                        </div>
-                    `;
-                    document.body.appendChild(msg);
-                    setTimeout(() => { 
-                        msg.style.transition = 'all 0.5s cubic-bezier(0.32,1,0.23,1)'; 
-                        msg.style.opacity = '0'; 
-                        msg.style.transform = 'translateX(-50%) translateY(20px)'; 
-                        setTimeout(() => msg.remove(), 500); 
-                    }, 18500);
-                }, 700);
+                // Show mock download modal
+                const downloadModal = document.getElementById('download-modal');
+                const progressBar = document.getElementById('progress-bar');
+                const progressText = document.getElementById('progress-text');
+                
+                downloadModal.classList.remove('hidden');
+                downloadModal.classList.add('flex');
+                progressBar.style.width = '0%';
+                progressText.textContent = '0%';
+                
+                // Fake download progress
+                let progress = 0;
+                const interval = setInterval(() => {
+                    progress += Math.random() * 18 + 7;
+                    if (progress >= 100) progress = 100;
+                    
+                    progressBar.style.width = progress + '%';
+                    progressText.textContent = Math.floor(progress) + '%';
+                    
+                    if (progress >= 100) {
+                        clearInterval(interval);
+                        setTimeout(() => {
+                            downloadModal.classList.add('hidden');
+                            downloadModal.classList.remove('flex');
+                            
+                            // Show Control Panel after "download"
+                            showControlPanel();
+                            
+                            if (window.confetti) {
+                                confetti({ particleCount: 180, spread: 90, origin: { y: 0.6 } });
+                            }
+                        }, 650);
+                    }
+                }, 180);
+                
                 return;
             }
 
-            // For Linux & macOS
+            // For Linux & macOS (keep original behavior)
             if (window.confetti) {
                 confetti({ particleCount: 150, spread: 90, origin: { y: 0.65 } });
             }
+            const urls = {
+                linux: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage',
+                macos: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.2.0.dmg'
+            };
             window.open(urls[platform], '_blank');
+        }
+
+        function showControlPanel() {
+            const panel = document.getElementById('control-panel-modal');
+            panel.classList.remove('hidden');
+            panel.classList.add('flex');
+            
+            // Initialize slider values
+            updateRamValue(document.getElementById('ram-slider').value);
+            updateCpuValue(document.getElementById('cpu-slider').value);
+            updateVramValue(document.getElementById('vram-slider').value);
+        }
+
+        function closeControlPanel() {
+            const panel = document.getElementById('control-panel-modal');
+            panel.classList.add('hidden');
+            panel.classList.remove('flex');
+        }
+
+        function updateRamValue(val) {
+            document.getElementById('ram-value').textContent = val + ' MB';
+        }
+        function updateCpuValue(val) {
+            document.getElementById('cpu-value').textContent = val;
+        }
+        function updateVramValue(val) {
+            document.getElementById('vram-value').textContent = val + ' MB';
+        }
+
+        function addSharedFolder() {
+            const list = document.getElementById('shared-folders-list');
+            const newFolder = document.createElement('div');
+            newFolder.className = 'flex items-center justify-between bg-white/5 px-3 py-2 rounded-xl';
+            newFolder.innerHTML = `
+                <span>~/New-Shared-Folder</span> 
+                <button onclick="this.parentElement.remove()" class="text-red-400 hover:text-red-500 text-xs px-2">Remove</button>
+            `;
+            list.appendChild(newFolder);
+        }
+
+        function applyConfiguration() {
+            const btns = event.currentTarget;
+            const originalText = event.target ? event.target.innerHTML : '';
+            
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#0f172a;border:1px solid #00ff9d;color:#00ff9d;padding:12px 24px;border-radius:9999px;font-size:13px;box-shadow:0 10px 30px rgba(0,255,157,0.3);z-index:99999;';
+            toast.innerHTML = '✅ Configuration saved to VM • Changes will apply on next boot';
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.transition = 'all 0.4s ease';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 400);
+            }, 2400);
+        }
+
+        function startVM() {
+            const statusEl = document.getElementById('vm-status');
+            statusEl.innerHTML = `<div class="w-2 h-2 bg-emerald-400 rounded-full animate-pulse"></div> <span>VM STATUS: RUNNING</span>`;
+            statusEl.className = 'px-4 py-1.5 text-sm font-mono bg-emerald-500/10 text-emerald-400 rounded-2xl border border-emerald-500/30 flex items-center gap-2';
+            
+            if (window.confetti) {
+                confetti({ particleCount: 250, spread: 100, origin: { y: 0.65 } });
+                setTimeout(() => confetti({ particleCount: 120, angle: 55, spread: 60, origin: { x: 0.2 } }), 300);
+            }
+            
+            const toast = document.createElement('div');
+            toast.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#052e16;border:1px solid #4ade80;color:#4ade80;padding:14px 28px;border-radius:9999px;font-size:14px;box-shadow:0 10px 40px rgba(74,222,128,0.4);z-index:99999;';
+            toast.innerHTML = '🚀 VM Launched! SSH: <span class="font-mono">ssh -p 2222 kali@localhost</span> (pass: kali)';
+            document.body.appendChild(toast);
+            
+            setTimeout(() => {
+                toast.style.transition = 'all 0.5s ease';
+                toast.style.opacity = '0';
+                setTimeout(() => toast.remove(), 500);
+            }, 5200);
         }
 
         function initializeEverything() {
             initializeTailwind();
             initThreeVM();
             
-            // Auto-highlight detected platform on load
             setTimeout(() => {
                 const platform = detectPlatform();
                 const card = document.getElementById('card-' + platform);
                 if (card) {
                     card.style.boxShadow = '0 0 0 3px rgba(0, 255, 157, 0.15)';
-                    // Gentle pulse
                     card.animate([
                         { boxShadow: '0 0 0 3px rgba(0, 255, 157, 0.15)' },
                         { boxShadow: '0 0 0 8px rgba(0, 255, 157, 0.05)' },
@@ -654,7 +890,6 @@
                 }
             }, 1350);
             
-            // Animate counters when in view
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -667,15 +902,21 @@
             const trustSection = document.querySelector('.bg-zinc-950');
             if (trustSection) observer.observe(trustSection);
             
-            // Keyboard shortcut hint
             document.addEventListener('keydown', (e) => {
                 if (e.key === '/' && document.activeElement.tagName === 'BODY') {
                     e.preventDefault();
                     detectAndScrollToDownload();
                 }
+                if (e.key === 'Escape') {
+                    const panel = document.getElementById('control-panel-modal');
+                    if (!panel.classList.contains('hidden')) {
+                        panel.classList.add('hidden');
+                        panel.classList.remove('flex');
+                    }
+                }
             });
             
-            console.log('%c[NeoBot] v3.0.0 Release page initialized — Windows button now triggers GitHub Releases download', 'color:#00ff9d');
+            console.log('%c[NeoBot] v3.0.0 + Mock Download + VM Control Panel initialized', 'color:#00ff9d');
         }
 
         window.onload = initializeEverything;
