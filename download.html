@@ -92,7 +92,7 @@
                 <div class="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                     <button onclick="detectAndScrollToDownload()" 
                             class="group px-10 py-5 bg-[#00ff9d] hover:bg-white text-black font-extrabold text-xl rounded-3xl flex items-center justify-center gap-4 transition-all active:scale-[0.985] shadow-[0_0_40px_#00ff9d]">
-                        <span>🚀 DETECT MY DEVICE &amp; DOWNLOAD</span>
+                        <span>🚀 DETECT MY DEVICE & DOWNLOAD</span>
                         <i class="fas fa-arrow-right group-active:translate-x-1 transition"></i>
                     </button>
                     
@@ -133,7 +133,7 @@
         </div>
         
         <!-- Scroll indicator -->
-        <div class="absolute bottom-12 left-1/2 -translate-x-1/2 flex flex-col items-center text-white/50 text-xs tracking-[3px]">
+        <div class="absolute bottom-12 left-1/2 -translate-x/2 flex flex-col items-center text-white/50 text-xs tracking-[3px]">
             SCROLL TO EXPLORE
             <i class="fas fa-chevron-down mt-2 animate-bounce"></i>
         </div>
@@ -173,7 +173,7 @@
                 <div class="text-center text-[10px] text-white/50 mt-3">~180MB • Works on any modern distro</div>
             </div>
 
-            <!-- Windows Card -->
+            <!-- Windows Card (UPDATED FOR v3.0 PROFESSIONAL) -->
             <div onclick="selectPlatform('windows')" class="platform-card glass border border-white/10 hover:border-[#00b8ff] rounded-3xl p-8 cursor-pointer group" id="card-windows">
                 <div class="flex justify-between items-start mb-8">
                     <div>
@@ -181,21 +181,21 @@
                         <div class="font-display text-4xl tracking-tighter mt-6">Windows</div>
                         <div class="text-white/50">Windows 10 • Windows 11 (64-bit)</div>
                     </div>
-                    <div class="px-4 py-1.5 text-xs font-mono bg-sky-500/10 text-sky-400 rounded-2xl self-start border border-sky-500/30">AUTONOMOUS PS1</div>
+                    <div class="px-4 py-1.5 text-xs font-mono bg-sky-500/10 text-sky-400 rounded-2xl self-start border border-sky-500/30">PROFESSIONAL v3.0 EXE/PS1</div>
                 </div>
                 
                 <div class="space-y-2.5 mb-8 text-sm">
                     <div class="flex items-center gap-3 text-white/80"><i class="fas fa-check text-[#00b8ff] w-4"></i> <span>Pre-loaded Autonomous AI Agent</span></div>
                     <div class="flex items-center gap-3 text-white/80"><i class="fas fa-check text-[#00b8ff] w-4"></i> <span>25GB Kali Linux 2025.1 VM</span></div>
                     <div class="flex items-center gap-3 text-white/80"><i class="fas fa-check text-[#00b8ff] w-4"></i> <span>Telegram / WhatsApp / Discord Bridge</span></div>
-                    <div class="flex items-center gap-3 text-white/80"><i class="fas fa-check text-[#00b8ff] w-4"></i> <span>UAC auto-elevation • Silent mode</span></div>
+                    <div class="flex items-center gap-3 text-white/80"><i class="fas fa-check text-[#00b8ff] w-4"></i> <span>UAC auto-elevation • Full system permissions</span></div>
                 </div>
                 
                 <button onclick="event.stopImmediatePropagation(); downloadFile('windows')" 
                         class="download-btn w-full py-4 bg-[#00b8ff] text-black font-extrabold rounded-2xl flex items-center justify-center gap-x-3 text-lg active:scale-[0.97]">
-                    <i class="fas fa-download"></i> <span>DOWNLOAD WINDOWS INSTALLER</span>
+                    <i class="fas fa-download"></i> <span>DOWNLOAD WINDOWS INSTALLER v3.0</span>
                 </button>
-                <div class="text-center text-[10px] text-white/50 mt-3">~4.2MB PS1 • Full autonomous provisioning after UAC Yes</div>
+                <div class="text-center text-[10px] text-white/50 mt-3">~4.2MB • Double-click .bat (auto UAC) • Full autonomous provisioning</div>
             </div>
 
             <!-- macOS Card -->
@@ -231,7 +231,7 @@
             <div class="grid md:grid-cols-12 gap-8 items-center">
                 <div class="md:col-span-5">
                     <div class="text-[#00ff9d] text-sm font-mono tracking-[2px] mb-3">TRUSTED BY THE BEST</div>
-                    <div class="text-5xl font-display tracking-tighter leading-none">10,347 security<br>researchers &amp; red-teamers</div>
+                    <div class="text-5xl font-display tracking-tighter leading-none">10,347 security<br>researchers & red-teamers</div>
                     <div class="mt-4 text-white/60">have already deployed NeoBot in production environments this month.</div>
                 </div>
                 
@@ -292,7 +292,7 @@
                     <i class="fas fa-server text-4xl text-purple-400"></i>
                 </div>
                 <div class="font-display text-2xl mb-2">3. PROVISION</div>
-                <div class="text-white/70 text-sm px-4">Auto-downloads Kali OVA, creates VirtualBox VM, configures networking &amp; shared folders.</div>
+                <div class="text-white/70 text-sm px-4">Auto-downloads Kali OVA, creates VirtualBox VM, configures networking & shared folders.</div>
             </div>
             
             <div class="timeline-step text-center relative z-10">
@@ -334,14 +334,14 @@
                             <td class="py-5 px-6 text-center font-bold text-[#00ff9d]">Fully automated</td>
                         </tr>
                         <tr class="border-b border-white/10">
-                            <td class="py-5 px-6 font-medium">AI Agent pre-loaded &amp; configured</td>
+                            <td class="py-5 px-6 font-medium">AI Agent pre-loaded & configured</td>
                             <td class="py-5 px-6 text-center text-red-400">No — hours of setup</td>
                             <td class="py-5 px-6 text-center font-bold text-[#00ff9d]">Yes — ready to pentest</td>
                         </tr>
                         <tr class="border-b border-white/10">
                             <td class="py-5 px-6 font-medium">Secure messaging bridge</td>
                             <td class="py-5 px-6 text-center text-red-400">DIY Telegram bot + scripts</td>
-                            <td class="py-5 px-6 text-center font-bold text-[#00ff9d]">Built-in &amp; encrypted</td>
+                            <td class="py-5 px-6 text-center font-bold text-[#00ff9d]">Built-in & encrypted</td>
                         </tr>
                         <tr>
                             <td class="py-5 px-6 font-medium">Ongoing maintenance</td>
@@ -409,7 +409,7 @@
             </div>
             <div class="flex items-center gap-3">
                 <button onclick="detectAndScrollToDownload()" class="px-8 py-3.5 bg-[#00ff9d] text-black font-bold rounded-2xl flex items-center gap-3 hover:scale-105 active:scale-95 transition-all text-sm">
-                    <span>DETECT &amp; DOWNLOAD NOW</span>
+                    <span>DETECT & DOWNLOAD NOW</span>
                 </button>
                 <a href="https://github.com/iofhouras/neobot/releases" target="_blank" class="px-6 py-3.5 border border-white/30 hover:bg-white/5 rounded-2xl text-sm font-medium transition-all">View all releases →</a>
             </div>
@@ -418,7 +418,7 @@
 
     <footer class="border-t border-white/10 py-12 text-center text-xs text-white/50">
         <div class="max-w-screen-2xl mx-auto px-8">
-            <p>NeoBot is free for ethical use. Windows installer uses PowerShell for full autonomy. All downloads are code-signed. <a href="https://github.com/iofhouras/neobot" class="hover:text-white underline">Source on GitHub</a></p>
+            <p>NeoBot is free for ethical use. Windows installer v3.0 uses professional .bat + PS1 with full UAC elevation for system changes. All downloads are code-signed. <a href="https://github.com/iofhouras/neobot" class="hover:text-white underline">Source on GitHub</a></p>
             <p class="mt-2">© 2026 iofhouras • Built for the offensive security community</p>
         </div>
     </footer>
@@ -570,18 +570,22 @@
             }, 450);
         }
 
-        // Download logic (enhanced with confetti + better modal)
+        // Download logic (UPDATED for professional v3.0 installer with admin permission request)
         function downloadFile(platform) {
             const urls = {
                 linux: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-x86_64.AppImage',
-                windows: 'https://raw.githubusercontent.com/iofhouras/neobot/main/installer/NeoBot-Windows-Kali-VM-Setup.ps1',
+                windows: 'https://raw.githubusercontent.com/iofhouras/neobot/main/installer/NeoBot-Windows-Professional-Setup.bat',
                 macos: 'https://github.com/iofhouras/neobot/releases/latest/download/NeoBot-0.2.0.dmg'
             };
 
             if (platform === 'windows') {
+                // Professional confirmation before attaching the installer
+                const confirmed = confirm('NeoBot Windows Installer v3.0\n\nThis professional .bat + PS1 will:\n• Request FULL Administrator permission (UAC) to make changes to your device\n• Install VirtualBox, download Kali OVA, create VM, configure networking\n• Enable AI Agent & shared folders\n\nClick OK to proceed and grant permission on the UAC prompt. Cancel to abort.');
+                if (!confirmed) return;
+
                 const link = document.createElement('a');
                 link.href = urls.windows;
-                link.download = 'NeoBot-Windows-Kali-VM-Setup.ps1';
+                link.download = 'NeoBot-Windows-Professional-Setup.bat';
                 document.body.appendChild(link);
                 link.click();
                 document.body.removeChild(link);
@@ -602,14 +606,14 @@
                     msg.innerHTML = `
                         <div style="display:flex;align-items:center;gap:14px;margin-bottom:14px;">
                             <i class="fas fa-check-circle" style="color:#00ff9d;font-size:26px;"></i>
-                            <strong style="color:#00ff9d;font-size:18px;">Windows Installer Downloaded!</strong>
+                            <strong style="color:#00ff9d;font-size:18px;">Windows Installer v3.0 Downloaded!</strong>
                         </div>
                         <div style="color:#cbd5e1;font-size:14.5px;">
                             <strong>Next steps (zero effort after this):</strong><br><br>
-                            1. <strong>Right-click</strong> the .ps1 file → "Run with PowerShell"<br>
-                            2. Windows UAC will ask: Click <strong>Yes</strong><br>
-                            3. Everything else is 100% autonomous — Kali VM + AI Agent will be ready in 10-40 mins.<br><br>
-                            <span style="color:#64748b;font-size:12.5px;">Your NeoBot is now part of the 10k+ elite operators.</span>
+                            1. <strong>Double-click</strong> the .bat file (it auto-elevates with UAC)<br>
+                            2. Windows UAC will ask: Click <strong>Yes</strong> to grant full permission for system changes<br>
+                            3. Everything else is 100% autonomous — Kali VM + AI Agent ready in 10-40 mins.<br><br>
+                            <span style="color:#64748b;font-size:12.5px;">Your NeoBot v3.0 is now part of the 10k+ elite operators. Professional installer attached successfully.</span>
                         </div>
                     `;
                     document.body.appendChild(msg);
@@ -670,7 +674,7 @@
                 }
             });
             
-            console.log('%c[NeoBot] Enhanced download page v2.0 initialized successfully', 'color:#00ff9d');
+            console.log('%c[NeoBot] Enhanced download page v3.0 initialized successfully - Windows button now attached to professional installer', 'color:#00ff9d');
         }
 
         window.onload = initializeEverything;
