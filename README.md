@@ -9,6 +9,31 @@
 
 ---
 
+## 🚀 Download NeoBot
+
+<p align="center">
+  <a href="https://github.com/iofhouras/neobot/releases/latest" 
+     style="display: inline-block; 
+            background: linear-gradient(90deg, #00ff9d, #00b8ff); 
+            color: #0a0a0a; 
+            padding: 22px 70px; 
+            border-radius: 60px; 
+            text-decoration: none; 
+            font-weight: 900; 
+            font-size: 26px; 
+            box-shadow: 0 15px 50px rgba(0, 255, 157, 0.6); 
+            transition: all 0.3s ease;
+            border: 3px solid #00ff9d;">
+    ⬇️ DOWNLOAD LATEST VERSION (v1.0)
+  </a>
+</p>
+
+<p align="center" style="margin-top: 15px; font-size: 18px; color: #00b8ff;">
+  <strong>One-click installer • Works on Windows, macOS & Linux • Free & Open Source</strong>
+</p>
+
+---
+
 ## 🚀 Overview
 
 NeoBot is the ultimate autonomous AI-powered GitHub developer that runs **locally and persistently** on your machine. It features a stunning cyberpunk-themed Tauri 2 desktop app (SvelteKit + shadcn/ui), one-click Kali Linux VM provisioning, and a powerful LangGraph-based agent with exact JSON persistent memory, reflection loops, and advanced tool capabilities including Playwright browser automation, guarded system commands, self-extension via dynamic skills, and full GitHub integration (PRs, repo edits, commits).
@@ -90,7 +115,7 @@ See `docs/neobot-integration.md` for detailed setup.
 
 ---
 
-**All changes committed on `phase3-logo-architecture` branch.**  
+**All changes committed on `phase3-prominent-download-link` branch.**  
 Ready for merge to `main`.
 
 ---
